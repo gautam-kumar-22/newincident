@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="col-lg-9">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}CreateBlog{% endblocktrans %}</li>
+		</ol>
+	</nav>
+	<div class="blog-create-container">
+		<form action="{% url 'blog-create' %}"  method="POST" enctype="multipart/form-data" id="add_host" class="col-sm-12">
+			{% csrf_token %}
+			<div class="form-group row">
+		        <label for="firstName" class="col-sm-3 control-label">Blog Title:</label>
+		        <div class="col-sm-8">
+		            {{form.title|add_class:'form-control'}}
+		            <span class='error-class'>{{form.title.errors}}</span>
+		        </div>
+		    </div>
+		    <div class="form-group row">
+		        <label for="firstName" class="col-sm-3 control-label">Discription:</label>
+		        <div class="col-sm-8">
+		            {{form.discription|add_class:'form-control'}}
+		            <span class='error-class'>{{form.discription.errors}}</span>
+		        </div>
+		    </div>
+		    <div class="form-group row">
+		        <label for="firstName" class="col-sm-3 control-label">Is_enable:</label>
+		        <div class="col-sm-8">
+		            {{form.is_enable|add_class:'form-control'}}
+		            <span class='error-class'>{{form.is_enable.errors}}</span>
+		        </div>
+		    </div>
+		<div class="pull-left">
+			<button type="reset" class="btn btn-danger">Reset</button>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript">
+	{{ form.media }}
+</script>
+{% endblock %}

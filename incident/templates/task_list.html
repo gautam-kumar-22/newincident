@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="col-lg-9 incident-list">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+			{% if open_task %}
+				<li class="breadcrumb-item active" aria-current="page">Open Tasks</li>
+			{% elif my_task %}
+				<li class="breadcrumb-item active" aria-current="page">my Tasks</li>
+			{% endif %}
+		</ol>
+	</nav>
+	<table class="table table-striped" id="example" class="display" style="width:100%">
+		<thead>
+			<th>#</th>
+			<th>Subject Name</th>
+			<th>assigned_user</th>
+			<th>status</th>
+			<th>Due Date</th>
+			<th>Incident Name</th>
+			<th>attachment</th>
+		</thead>
+		<tbody>
+			{% for task in tasks_list %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{task.task_subject}}</td>
+					<td>{{task.assigned_user}}</td>
+					<td>{{task.status}}</td>
+					<td>{{task.due_date}}</td>
+					<td>{{task.incident.subject}}</td>
+					<td><a href="#">{{task.attachment}}</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% include 'pagination.html' %}
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#example').DataTable( {
+		        initComplete: function () {
+		            this.api().columns().every( function () {
+		                var column = this;
+		                var select = $('<select><option value=""></option></select>')
+		                    .appendTo( $(column.header()) )
+		                    .on( 'change', function () {
+		                        var val = $.fn.dataTable.util.escapeRegex(
+		                            $(this).val()
+		                        );
+		                        column
+		                            .search( val ? '^'+val+'$' : '', true, false )
+		                            .draw();
+		                    } );
+		 
+		                column.data().unique().sort().each( function ( d, j ) {
+		                    select.append( '<option value="'+d+'">'+d+'</option>' )
+		                } );
+		            } );
+		        }
+		    } );
+	});
+</script>
+{% endblock %}

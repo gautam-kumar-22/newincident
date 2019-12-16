@@ -1,0 +1,87 @@
+{% load i18n %}
+<div class="bs-example">
+    <nav class="navbar navbar-expand-md header-example">
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="login-user-name" style="font-weight: bold;">{% blocktrans %}Welcome{% endblocktrans %}  {{request.user}}</div>
+        </div>
+    </nav>
+</div>
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'dashboard' %}">Logo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'dashboard' %}"><span class="d-none d-sm-inline">{% blocktrans %}Dashboard{% endblocktrans %}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><span class="d-none d-sm-inline">{% blocktrans %}Incidents{% endblocktrans %}</span></a>
+            <div class="collapse" id="submenu1" aria-expanded="false">
+                <ul class="flex-column pl-2 nav">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'create-incident' %}"><span>{% blocktrans %}New incidents{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'list-incident' %}"><span>{% blocktrans %}All incidents{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'open-incident' %}"><span>{% blocktrans %}Open incidents{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'closed-incident' %}"><span>{% blocktrans %}Closed incidents{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'pending-incident' %}"><span>{% blocktrans %}Pending incidents{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'pending-incident' %}"><span>{% blocktrans %}In progress{% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'my-incident' %}"><span>{% blocktrans %}My Incident{% endblocktrans %}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed text-truncate" href="#" data-toggle="collapse" data-target="#submenu2"><span class="d-none d-sm-inline">{% blocktrans %}Tasks{% endblocktrans %}</span></a>
+            <div class="collapse" id="submenu2" aria-expanded="false">
+                <ul class="flex-column pl-2 nav">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'open-task' %}"><span>{% blocktrans %}Open tasks {% endblocktrans %}</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'my-task' %}"><span>{% blocktrans %}My tasks{% endblocktrans %}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'recent-task-chart' %}"><span class="d-none d-sm-inline">{% blocktrans %}Report{% endblocktrans %}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="/admin/"><span class="d-none d-sm-inline">{% blocktrans %}Admin{% endblocktrans %}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url "calendar" %}"><span class="d-none d-sm-inline">{% blocktrans %}Calender{% endblocktrans %}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url "blog-list" %}"><span class="d-none d-sm-inline">{% blocktrans %}Blog{% endblocktrans %}</span></a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url "logout" %}" class="nav-item nav-link">{% blocktrans %}Logout{% endblocktrans %}</a>
+        </li>
+    </ul>
+</div>
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        if(window.location.pathname=="/"){
+            $('.bs-example').remove();
+            $('#sidebar-wrapper').remove();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-9 dashboard">
+		<nav aria-label="breadcrumb" style="padding-top: 8%;">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Dashboard{% endblocktrans %}</li>
+			</ol>
+		</nav>
+		<div class="incident">{% blocktrans %}Incidents{% endblocktrans %}</div>
+		<div class="main-panel" style="background-color: #f1f4f7; padding: 1%;">
+			<div class="content-wrapper">
+				<div class="row">
+					<div class="col-xl-12 grid-margin stretch-card flex-column">
+						<div class="row" style="padding-top: 1%;">
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'list-incident' %}">
+									<div class="incident-body all-incident">
+									<div class="card-body d-flex flex-column justify-content-between">
+										{% blocktrans %}All incidents{% endblocktrans %}
+									</div>
+									<div class="count">{{all_incident_count}}</div>
+								</div>
+								</a>
+								
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'latest-incident' %}">
+									<div class="card incident-body latest-incident">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}Latest Incidents{% endblocktrans %}
+										</div>
+										<div class="count">{{latest_incident_count}}</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'closed-incident' %}">
+									<div class="card incident-body closed-incident">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}Closed incidents{% endblocktrans %}
+										</div>
+										<div class="count">{{closed_incident_count}}</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'open-incident' %}">
+									<div class="card incident-body open-incident">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}Open incidents{% endblocktrans %}
+										</div>
+										<div class="count">{{open_incident_count}}</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="row" style="padding-top: 1%;">
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'inprogress-incident' %}">
+									<div class="card incident-body inprogress-incident">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}In progress{% endblocktrans %}
+										</div>
+										<div class="count">{{inprogress_incident_count}}</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'pending-incident' %}">
+									<div class="card incident-body pending-incident">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}Pending incidents{% endblocktrans %}
+										</div>
+										<div class="count">{{pending_incident_count}}</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'open-task' %}">
+									<div class="card incident-body open-task">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}Open tasks {% endblocktrans %}
+										</div>
+										<div class="count">{{all_task_count}}</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 grid-margin stretch-card">
+								<a href="{% url 'my-task' %}">
+									<div class="card incident-body my-task">
+										<div class="card-body d-flex flex-column justify-content-between">
+											{% blocktrans %}My tasks{% endblocktrans %}
+										</div>
+										<div class="count">{{my_task_count}}</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>  
+			</div>
+		</div>
+		<a href="{% url 'create-incident' %}"><button type="button" class="btn btn-primary btn-lg btn-block add_incident">{% blocktrans %}New incident{% endblocktrans %}</button></a>
+	</div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

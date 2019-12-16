@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="col-lg-9 blog-list">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Blog{% endblocktrans %}</li>
+		</ol>
+	</nav>
+
+	<div class="blog-list-container col-sm-12">
+		{% for blog in blog_list %}
+		<div class="blog" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4); padding-bottom: 2%; padding-top: 2%;">
+			<div class="blog-title" style="font-weight: bold; color: #264c7b; padding-bottom: 2%;">{{blog.title}}</div>
+			<div>{{blog.discription|safe}}</div>
+			<div class="blog-others"><span style="font-weight: bold; color: #264c7b; padding-right: 2%;"> - {{blog.user.username}}</span>{{blog.created_on}}</div>
+            <div class="blog-action" data-id="{{blog.id}}" style="padding-top: 2%;"> Action : 
+				<a href="{% url 'blog-update' blog.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="#" class="blog-delete" data-id="{{blog.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </div>
+		</div>
+		{% endfor %}
+	<a href="{% url 'blog-create' %}"><button type="button" class="btn btn-primary btn-lg btn-block add_incident">{% blocktrans %}New Blog{% endblocktrans %}</button></a>
+	</div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.blog-delete').on('click', function(){
+		    data_id = $(this).data('id');
+		    var url = "{% url 'blog-delete' 22322 %}".replace('22322', data_id);
+		    bootbox.confirm("Are you sure to delete this blog ?", function (result){
+		        if (result){
+		            $.ajax({
+		                url: url,
+		                type: "POST",
+		                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+		                success: function(result){
+		                    location.reload();
+		                }
+		            });
+		        }else{
+		            return true;
+		        }
+		    });
+		});
+
+	});
+</script>
+{% endblock %}

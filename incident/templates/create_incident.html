@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags static %}
+{% block content %}
+<div class="col-lg-9">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Create Incident{% endblocktrans %}</li>
+		</ol>
+	</nav>
+    <div class="card">
+        <div class="card-header">
+            {% blocktrans %}Create Incident{% endblocktrans %}
+        </div>
+        <div class="card-body">
+             {% crispy form %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on('click', '.dateinput', function(){
+			$('.dateinput').datepicker({
+			});
+		});
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+
+	<div class="container login-container col-md-12">
+		<div class="row">
+			<div class="col-sm-4">
+			</div>
+			<div class="form-container col-sm-4">
+				<div class="messages" style="padding-top: 0px; position: relative;">
+				    {% if messages %}
+				        {% for message in messages %}
+						<span class="glyphicon glyphicon-remove-sign close close_message_div" aria-hidden="true"></span>
+						<div class='alert alert-{% if message.tags == "success" %}success{% else %}danger{% endif %}'>
+						<strong>{{ message }}</strong>
+						</div>
+				        {% endfor %}
+				    {% endif %}
+				</div>
+				<form class="form-horizontal login-form" role="form" method="POST" action="." autocomplete="on">
+				    <div style="text-align: center; color:#fff;">
+				        <h2>{% blocktrans %}sign-in{% endblocktrans %}</h2>
+			    	</div>
+					{% csrf_token %}
+					<div class="form-group row">
+					    <div class="input-group">
+							<input type="text" class="form-control" name='username' placeholder="Username" required>
+						</div>
+					</div>
+			 		<div class="form-group row">
+					    <div class="input-group">
+					    	<input type="password" class="form-control" name='password' placeholder="Password" required>
+					    </div>
+					</div>
+					<div class="form-group" style="padding: 1em 0 0 9.6em;">
+						<div>
+		  					<input type="submit" value="{% blocktrans %}sign-in{% endblocktrans %}" class="btn login-button">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

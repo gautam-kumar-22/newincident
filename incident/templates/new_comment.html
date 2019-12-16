@@ -1,0 +1,6 @@
+{% block content %}
+	<div class="comment" style="margin: 2%; background-color: #fff;">
+	    <div class="comment-text">{{comment_obj.comment}}</div>
+	    <div style="font-weight: bold;">{{comment_obj.user}}{{comment_obj.created_on}}</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="col-lg-9 incident-list">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			{% if all_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}All incidents{% endblocktrans %}</li>
+			{% elif open_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Open incidents{% endblocktrans %}</li>
+			{% elif close_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Closed incidents{% endblocktrans %}</li>
+			{% elif inprogress_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}In progress{% endblocktrans %}</li>
+			{% elif pending_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Pending incidents{% endblocktrans %}</li>
+			{% elif latest_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Latest Incidents{% endblocktrans %}</li>
+			{% elif my_incident %}
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}My Incident{% endblocktrans %}</li>
+			{% endif %}
+		</ol>
+	</nav>
+	<div class="pull-right">
+		<button class="btn btn-success print" style="margin-bottom: 12%;"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+	</div>
+	<a href="{% url 'export_incident_xls' %}">Export incidents</a>
+	<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+            	<th class="th-sm">#</th>
+        		<th class="th-sm">{% blocktrans %}Name{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}Category{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}sector{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}status{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}assigned_user{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}Action{% endblocktrans %}</th>
+            </tr>
+          </thead>
+        <tbody>
+	{% for incident in incidents_list %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{incident.subject}}</td>
+			<td>{{incident.category.name}}</td>
+			<td>{{incident.sector.name}}</td>
+			<td>{{incident.status}}</td>
+			<td>{{incident.assigned_user}}</td>
+            <td data-id="{{incident.id}}">
+				<a href="{% url 'edit-incident' incident.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="#" class="delete-incident" data-id="{{incident.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="{% url 'incident-detail' incident.id %}"><i class='fas fa-eye' aria-hidden="true"></i></a>
+            </td>
+		</tr>
+	{% endfor %}
+  </tbody>
+        <tfoot>
+            <tr>
+                <th class="th-sm">#</th>
+        		<th class="th-sm">{% blocktrans %}Name{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}Category{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}sector{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}status{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}assigned_user{% endblocktrans %}</th>
+        		<th class="th-sm">{% blocktrans %}Action{% endblocktrans %}</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		// $('.print').click(function(){
+		// 	window.print();
+		// });
+
+		function printData()
+		{
+		   var divToPrint=document.getElementById("example");
+		   newWin= window.open("");
+		   newWin.document.write(divToPrint.outerHTML);
+		   newWin.print();
+		   newWin.close();
+		}
+
+		$('.print').on('click',function(){
+		printData();
+		}) 
+
+		$('#example').DataTable( {
+		        initComplete: function () {
+		        	var columnIndex = 0;
+		            this.api().columns().every( function () {
+		            	columnIndex = columnIndex + 1;
+		            	if(columnIndex != 7){
+		                var column = this;
+		                var select = $('<select><option value=""></option></select>')
+		                    .appendTo( $(column.header()) )
+		                    .on( 'change', function () {
+		                        var val = $.fn.dataTable.util.escapeRegex(
+		                            $(this).val()
+		                        );
+		                        column
+		                            .search( val ? '^'+val+'$' : '', true, false )
+		                            .draw();
+		                    } );
+		 
+		                column.data().unique().sort().each( function ( d, j ) {
+		                    select.append( '<option value="'+d+'">'+d+'</option>' )
+		                } );
+		                }
+		            } );
+		        }
+		    } );
+
+		$('.delete-incident').on('click', function(){
+		    data_id = $(this).data('id');
+		    var url = "{% url 'delete-incident' 22322 %}".replace('22322', data_id);
+		    bootbox.confirm("Are you sure to delete this incident?", function (result){
+		        if (result){
+		            $.ajax({
+		                url: url,
+		                type: "POST",
+		                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+		                success: function(result){
+		                    location.reload();
+		                }
+		            });
+		        }else{
+		            return true;
+		        }
+		    });
+		});
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block content %}
+<div class="col-lg-9">
+    <nav aria-label="breadcrumb" style="padding-top: 8%;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Detail Incident{% endblocktrans %}</li>
+        </ol>
+    </nav>
+    <div class="card">
+            <div class="card-header">
+                <h3><b>{% blocktrans %}Incident Name{% endblocktrans %} {{ object }}</b></h3>
+            </div>
+            <div class="card-body incident-detail" data-id={{object.id}}>
+            <table class="table">
+        	{% if object.subject %}
+        	<tr>
+                <th>{% blocktrans %}Subject{% endblocktrans %}</th>
+                <td>{{ object.subject }}</td>
+            </tr>
+        	{% endif %}
+        	{% if object.category %}
+        	<tr>
+                <th>{% blocktrans %}Category{% endblocktrans %}</th>
+                <td>{{ object.category.name }}</td>
+            </tr>
+        	{% endif %}
+        	{% if object.timestamp %}
+        	<tr>
+                <th>{% blocktrans %}Timestamp{% endblocktrans %}</th>
+                <td>{{ object.timestamp }}</td>
+            </tr>
+        	{% endif %}
+            {% if object.sector %}
+            <tr>
+                <th>{% blocktrans %}Sector{% endblocktrans %}</th>
+                <td>{{ object.sector }}</td>
+            </tr>
+            {% endif %}
+            {% if object.description %}
+            <tr>
+                <th>{% blocktrans %}Description{% endblocktrans %}</th>
+                <td>{{ object.description }}</td>
+            </tr>
+            {% endif %}
+            {% if object.status %}
+            <tr>
+                <th>{% blocktrans %}Status{% endblocktrans %}</th>
+                <td>{{ object.status }}</td>
+            </tr>
+            {% endif %}
+            {% if object.assigned_user %}
+            <tr>
+                <th>{% blocktrans %}Assigned user{% endblocktrans %}</th>
+                <td>{{ object.assigned_user }}</td>
+            </tr>
+            {% endif %}
+            </table>
+            </div>
+    </div>
+    <div class="comment-section">
+        {% for comment_obj in all_comment %}
+            <div class="comment" style="margin: 2%; background-color: #fff;">
+                <div class="comment-text">{{comment_obj.comment}}</div>
+                <div style="font-weight: bold;">{{comment_obj.user}}{{comment_obj.created_on}}</div>
+            </div>
+        {% endfor %}
+        <div class="my-comment">
+            {% include "new_comment.html" %}
+        </div>
+    </div>
+    <div class="new-comment">
+        <div class="form-group">
+          <label for="comment">{% blocktrans %}Comment:{% endblocktrans %}</label>
+          <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary save-comment">{% blocktrans %}Submit{% endblocktrans %}</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.save-comment').on('click', function(){
+            var incident_id = $('.incident-detail').attr('data-id');
+            var comment_text = $('#comment').val();
+            var url = "{% url 'add-comment' %}";
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}', 'comment_text': comment_text, 'incident_id': incident_id},
+                success: function(result){
+                    $('.my-comment').append(result);
+                    $('#comment').val('');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

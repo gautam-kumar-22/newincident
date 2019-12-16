@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="col-lg-9">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Calendar{% endblocktrans %}</li>
+		</ol>
+	</nav>
+	<div class="calendar-container">
+		<div class="clearfix">
+			<a class="btn btn-info left" href="?{{ prev_month }}"> Previous Month </a>
+			<a class="btn btn-info right" href="?{{ next_month }}"> Next Month </a>
+		</div>
+		{{ calendar }}
+	</div>
+</div>
+{% endblock %}

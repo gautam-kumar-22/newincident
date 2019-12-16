@@ -1,0 +1,309 @@
+/* -----------login page css--------------- */
+.container.login-container.col-md-12 {
+    background-color: #262f52;
+    height: 100%;
+}
+
+.login-button{
+	color: black;
+	background-color: #FFC312;
+	width: 100px;
+}
+
+.login-button:hover{
+	color: black;
+	background-color: white;
+}
+.login-form {
+    padding-top: 16%;
+}
+/* -----------header css--------------- */
+.bs-example{
+	background-color: #243165;
+	color: #fff;
+    position: fixed;
+    width: 97%;
+    z-index: 9;
+    line-height: 37px;
+}
+.bs-example .nav-link {
+    color: #fff;
+}
+/* -----------dashboard css--------------- */
+.card-body.d-flex.flex-column.justify-content-between {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 136%;
+}
+.incident {
+    text-align: center;
+    font-size: 180%;
+    font-weight: bold;
+    color: #2f7394;
+}
+.incident-body{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    height: 180px;
+    box-shadow: 2px 2px #afa6a6;
+}
+.count {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5%;
+}
+button.btn.btn-primary.btn-lg.btn-block.add_incident {
+    margin-top: 2%;
+}
+footer.page-footer.font-small.blue {
+    margin-top: 10%;
+}
+.stretch-card a {
+    text-decoration: none 
+}
+.incident-body.all-incident {
+    background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%) !important;
+}
+.card.incident-body.latest-incident {
+    background: linear-gradient(to left bottom, rgb(255, 80, 80) 13%, rgb(255, 80, 80) 100%);
+}
+.card.incident-body.closed-incident {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%) !important;
+}
+.card.incident-body.open-incident {
+    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%) !important;
+}
+.card.incident-body.inprogress-incident {
+   background: linear-gradient(to left bottom, rgb(255, 51, 153) 13%, rgb(255, 153, 204) 100%);
+}
+.card.incident-body.pending-incident {
+    background: linear-gradient(to left bottom, rgb(0, 102, 102) 13%, rgb(102, 153, 153) 100%);
+}
+.card.incident-body.open-task {
+    background: linear-gradient(to left bottom, rgb(0, 204, 0) 13%, rgb(0, 204, 0) 100%);
+}
+.card.incident-body.my-task {
+    background: linear-gradient(to left bottom, rgb(255, 153, 0) 13%, rgb(255, 153, 0) 100%);
+}
+/*--------------right-side-nav-bar-css----------------*/
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-right: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 250px;
+    bottom: 1px;
+    width: 0;
+    height: 100%;
+    margin-right: -234px;
+    overflow-y: auto;
+    background: #243165;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.nav-link[data-toggle].collapsed:after {
+    content: "▾";
+}
+.nav-link[data-toggle]:not(.collapsed):after {
+    content: "▴";
+}
+.sidebar-nav .nav-item a{
+    color: #fff;
+}
+.flex-column .nav-item a{
+    color: #fff;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+    border-bottom: 1px solid;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-right: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-right: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+.comment-section {
+    background-color: #f7f5f5;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
+/*--------comment-------------*/
+
+/*------------calendar-------------*/
+.calendar-container .calendar {
+  width: 98%;
+  margin: auto;
+  font-size: 13px;
+}
+
+.calendar-container .calendar tr, .calendar td {
+  border: 1px solid black;
+}
+
+.calendar-container .calendar th {
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.calendar-container .calendar td {
+  width: 200px;
+  height: 150px;
+  padding: 20px 0px 0px 5px;
+}
+
+.calendar-container .month {
+  font-size: 25px;
+}
+
+.calendar-container .date {
+  font-size: 16px;
+}
+
+.calendar-container ul {
+  height: 100%;
+  padding: 0px 5px 0px 20px;
+}
+
+.calendar-container a {
+  color: #17a2b8;
+}
+.calendar-container .left {
+  float: left;
+}
+
+.calendar-container .right {
+  float: right;
+}
+
+.calendar-container .btn {
+  outline: none;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
+
+.calendar-container .clearfix {
+  margin: 15px;
+}
+.calendar-container li {
+    color: #2e4773;
+    font-weight: bold;
+}

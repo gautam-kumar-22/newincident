@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-09 08:31+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: incident/models.py:25 incident/models.py:51
+msgid "Name"
+msgstr "اسم"
+
+#: incident/models.py:31
+msgid "Category"
+msgstr "الفئة"
+
+#: incident/models.py:32
+msgid "Categorys"
+msgstr "الاقسام"
+
+#: incident/models.py:38
+msgid "Unit"
+msgstr "وحدة"
+
+#: incident/models.py:44
+msgid "AffectedUnit"
+msgstr "الوحدة المتأثرة"
+
+#: incident/models.py:45
+msgid "AffectedUnits"
+msgstr "الوحدة المتأثرة"
+
+#: incident/models.py:52
+msgid "list_of_affectedunit"
+msgstr "قائمة الوحدة المتأثرة"
+
+#: incident/models.py:58
+msgid "Sector"
+msgstr "قطاع"
+
+#: incident/models.py:59
+msgid "Sectors"
+msgstr "القطاعات"
+
+#: incident/models.py:72
+msgid "subject"
+msgstr "موضوع"
+
+#: incident/models.py:73
+msgid "category"
+msgstr "الفئة"
+
+#: incident/models.py:74
+msgid "timestamp"
+msgstr "الطابع الزمني"
+
+#: incident/models.py:75
+msgid "sector"
+msgstr "قطاع"
+
+#: incident/models.py:76
+msgid "description"
+msgstr "وصف"
+
+#: incident/models.py:77 incident/models.py:118
+msgid "status"
+msgstr "الحالة"
+
+#: incident/models.py:78 incident/models.py:115
+msgid "assigned_user"
+msgstr "المستخدم المعين"
+
+#: incident/models.py:79 incident/models.py:117
+msgid "attachment"
+msgstr "المرفق"
+
+#: incident/models.py:88 incident/models.py:98
+msgid "name"
+msgstr "اسم"
+
+#: incident/models.py:89 incident/models.py:99 incident/models.py:119
+msgid "incident"
+msgstr "حادث"
+
+#: incident/models.py:114
+msgid "task_subject"
+msgstr "موضوع المهمة"
+
+#: incident/models.py:116
+msgid "due_date"
+msgstr "تاريخ الاستحقاق"
+
+#: incident/models.py:129
+msgid "comment"
+msgstr "تعليق"
+
+#: incident/models.py:130
+msgid "user"
+msgstr "المستعمل"
+
+#: incident/models.py:131
+msgid "task"
+msgstr "مهمة"
+
+#: incident/templates/create_incident.html:14
+msgid "Django is nice"
+msgstr ""
+
+#: incident_project/settings.py:153
+msgid "Arabic"
+msgstr ""
+
+#: incident_project/settings.py:154
+msgid "English"
+msgstr ""
+
+#: templates/base.html:8
+msgid "HOME PAGE"
+msgstr "اسم المستخدم"
+
+msgid "Password"
+msgstr "كلمة المرور "
+
+msgid "Dashboard"
+msgstr "الصفحة الريئسية"
+
+msgid "New incidents"
+msgstr "الحوادث الجديدة"
+
+msgid "All incidents"
+msgstr "كل الحوادث "
+
+msgid "Closed incidents"
+msgstr "الحوادث المغلقة"
+
+msgid "Open incidents"
+msgstr "الحوادث الغير مغلقة "
+
+msgid "In progress"
+msgstr "الحوادث الجارية"
+
+msgid "Pending incidents"
+msgstr "الحوادث المتعلقة"
+
+msgid "Open tasks "
+msgstr "المهام الغير متكملة"
+
+msgid "My tasks"
+msgstr "المهام الموكلة لي "
+
+msgid "New incident"
+msgstr "ابلاغ حادث جديد"
+
+msgid "sign-in"
+msgstr "تسجيل الدخول"
+
+msgid "login"
+msgstr "تسجيل الدخول"
+
+msgid "Welcome"
+msgstr "أهلا بك"
+
+msgid "Incidents"
+msgstr "حوادث"
+
+
+msgid "Tasks"
+msgstr "مهام"
+
+
+msgid "Report"
+msgstr "أبلغ عن"
+
+
+msgid "Admin"
+msgstr "مشرف"
+
+msgid "Calender"
+msgstr "التقويم"
+
+msgid "Logout"
+msgstr "الخروج"
+
+msgid "Latest Incidents"
+msgstr "آخر الحوادث"
+
+msgid "Action"
+msgstr "عمل"
+
+msgid "Create Incident"
+msgstr "خلق حادث"
+
+msgid "Detail Incident"
+msgstr "حادث التفاصيل"
+
+msgid "Incident Name"
+msgstr "اسم الحادث"
+
+msgid "Subject"
+msgstr "موضوع"
+
+msgid "Timestamp"
+msgstr "الطابع الزمني"
+
+msgid "Description"
+msgstr "وصف"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Assigned user"
+msgstr "المستخدم المعين"
+
+msgid "Comment:"
+msgstr "تعليق:"
+
+msgid "Submit"
+msgstr "خضع"
+
+msgid "TASKS CHART UPON STATUS"az
+msgstr "المهام الرسم البياني على الوضع"
+
+msgid "INCIDENT CHART UPON STATUS"
+msgstr "حادث رسم بياني على الوضع"
+
+msgid "ACTIVE USER CHART"
+msgstr "مخطط المستخدم النشط"
+
+msgid "RECENT TASK STATUS CHART"
+msgstr "المهمة الأخيرة مخطط الحالة"
+
+msgid "INICIDENT PER SECTOR CHART"
+msgstr "حادث لكل قطاع المخطط"
+
+msgid "add another"
+msgstr "أضف آخر"
+
+msgid "remove"
+msgstr "إزالة"
+
+msgid "My Incident"
+msgstr "حادثة بلدي"
+
+msgid "Calendar"
+msgstr "التقويم"
+
+msgid "Blog"
+msgstr "مدونة"
+
+msgid "New Blog"
+msgstr "مدونة جديدة"
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""

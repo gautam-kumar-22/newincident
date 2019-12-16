@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="col-lg-9 chart-container recent-task-chart">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Report{% endblocktrans %}</li>
+		</ol>
+	</nav>
+	<div id="StatusTaskContainer" style="height: 300px; width: 100%;"></div>
+	<div id="StatusIncidentContainer" style="height: 300px; width: 100%; margin-top: 4%;"></div>
+	<div id="ActiveUserContainer" style="height: 300px; width: 100%; margin-top: 4%;"></div>
+	<div id="RecentTaskStatusContainer" style="height: 300px; width: 100%; margin-top: 4%;"></div>
+	<div id="IncidentChartPerSectorContainer" style="height: 300px; width: 100%; margin-top: 4%;"></div>
+	<!-- TASKS CHART UPON STATUS -->
+	
+	<!-- INCIDENT CHART UPON STATUS --><input type="hidden" id="open_task_count" value="{{open_task_count}}">
+	<input type="hidden" id="inprogress_task_count" value="{{inprogress_task_count}}">
+	<input type="hidden" id="close_task_count" value="{{close_task_count}}">
+	<input type="hidden" id="open_incident_count" value="{{open_incident_count}}">
+	<input type="hidden" id="closed_incident_count" value="{{closed_incident_count}}">
+	<input type="hidden" id="inprogress_incident_count" value="{{inprogress_incident_count}}">
+	<input type="hidden" id="pending_incident_count" value="{{pending_incident_count}}">
+	<!-- ACTIVE USER CHART -->
+	<input type="hidden" id="active_user_count" value="{{active_user_count}}">
+	<input type="hidden" id="inactive_user_count" value="{{inactive_user_count}}">
+	<!-- RECENT TASK STATUS CHART -->
+	<input type="hidden" id="recent_open_task_count" value="{{recent_open_task_count}}">
+	<input type="hidden" id="recent_inprogress_task_count" value="{{recent_inprogress_task_count}}">
+	<input type="hidden" id="recent_close_task_count" value="{{recent_close_task_count}}">
+	<!-- INICIDENT PER SECTOR CHART -->
+	{% for sector in sector_count %}
+		{% for key, value in sector.items %}
+			<input type="hidden" class="sector_count" id="{{key}}" value="{{value}}">
+		{% endfor %}
+	{% endfor %}
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+
+window.onload = function() {
+var open_task_count = parseInt($('#open_task_count').val());
+var inprogress_task_count = parseInt($('#inprogress_task_count').val());
+var close_task_count = parseInt($('#close_task_count').val());
+var status_task_options = {
+	// exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "{% blocktrans %}TASKS CHART UPON STATUS{% endblocktrans %}"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (#percent%)",
+		indexLabelPlacement: "inside",
+		dataPoints: [
+			{ y: open_task_count, name: "Open-tasks" },
+			{ y: inprogress_task_count, name: "Inprogress-tasks" },
+			{ y: close_task_count, name: "Closed-task" }
+		]
+	}]
+};
+$("#StatusTaskContainer").CanvasJSChart(status_task_options);
+
+var open_incident_count = parseInt($('#open_incident_count').val());
+var closed_incident_count = parseInt($('#closed_incident_count').val());
+var inprogress_incident_count = parseInt($('#inprogress_incident_count').val());
+var pending_incident_count = parseInt($('#pending_incident_count').val());
+
+var status_incident_options = {
+	animationEnabled: true,
+	title:{
+		text: "{% blocktrans %}INCIDENT CHART UPON STATUS{% endblocktrans %}"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (#percent%)",
+		indexLabelPlacement: "inside",
+		dataPoints: [
+			{ y: open_incident_count, name: "Open-incident" },
+			{ y: closed_incident_count, name: "Inprogress-incident" },
+			{ y: inprogress_incident_count, name: "Closed-incident" },
+			{ y: pending_incident_count, name: "pending-incident" }
+		]
+	}]
+};
+$("#StatusIncidentContainer").CanvasJSChart(status_incident_options);
+
+var active_user_count = parseInt($('#active_user_count').val());
+var inactive_user_count = parseInt($('#inactive_user_count').val());
+console.log(active_user_count, inactive_user_count);
+var active_user_options = {
+	animationEnabled: true,
+	title:{
+		text: "{% blocktrans %}ACTIVE USER CHART{% endblocktrans %}"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (#percent%)",
+		indexLabelPlacement: "inside",
+		dataPoints: [
+			{ y: active_user_count, name: "Active-user" },
+			{ y: inactive_user_count, name: "Inactive-user" },
+		]
+	}]
+};
+$("#ActiveUserContainer").CanvasJSChart(active_user_options);
+
+var recent_open_task_count = parseInt($('#recent_open_task_count').val());
+var recent_inprogress_task_count = parseInt($('#recent_inprogress_task_count').val());
+var recent_close_task_count = parseInt($('#recent_close_task_count').val());
+var recent_task_status_options = {
+	animationEnabled: true,
+	title:{
+		text: "{% blocktrans %}RECENT TASK STATUS CHART{% endblocktrans %}"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (#percent%)",
+		indexLabelPlacement: "inside",
+		dataPoints: [
+			{ y: recent_open_task_count, name: "Open-tasks" },
+			{ y: recent_inprogress_task_count, name: "Inprogress-tasks" },
+			{ y: recent_close_task_count, name: "Closed-task" }
+		]
+	}]
+};
+$("#RecentTaskStatusContainer").CanvasJSChart(recent_task_status_options);
+var incident_per_sector = new Array();
+$('.sector_count').each(function(index, value){
+	var data = {y:$(this).val(), name:$(this).attr('id')};
+	incident_per_sector.push(data);
+});
+var incidents_per_sector_options = {
+	animationEnabled: true,
+	title:{
+		text: "{% blocktrans %}INICIDENT PER SECTOR CHART{% endblocktrans %}"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (#percent%)",
+		indexLabelPlacement: "inside",
+		dataPoints: incident_per_sector
+	}]
+};
+$("#IncidentChartPerSectorContainer").CanvasJSChart(incidents_per_sector_options);
+
+}
+
+</script>
+{% endblock %}
