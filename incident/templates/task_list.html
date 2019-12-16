@@ -12,6 +12,10 @@
 			{% endif %}
 		</ol>
 	</nav>
+	<div class="pull-right">
+		<button class="btn btn-success print" style="margin-bottom: 12%;"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+	</div>
+	<a href="{% url 'export_task_xls' %}"><button class="btn btn-success export"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Task</button></a>
 	<table class="table table-striped" id="example" class="display" style="width:100%">
 		<thead>
 			<th>#</th>
@@ -42,6 +46,20 @@
 {% block js %}
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		function printData()
+		{
+		   var divToPrint=document.getElementById("example");
+		   newWin= window.open("");
+		   newWin.document.write(divToPrint.outerHTML);
+		   newWin.print();
+		   newWin.close();
+		}
+
+		$('.print').on('click',function(){
+		printData();
+		}) 
+
 		$('#example').DataTable( {
 		        initComplete: function () {
 		            this.api().columns().every( function () {

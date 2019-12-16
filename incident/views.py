@@ -387,7 +387,7 @@ class BlogListView(BaseLoginRequired, ListView):
 
 def export_incident_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="users.xls"'
+    response['Content-Disposition'] = 'attachment; filename="incident.xls"'
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Incidents')
@@ -410,6 +410,41 @@ def export_incident_xls(request):
         row_num += 1
         for col_num in range(len(row)):
             ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+
+def export_task_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="task.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Tasks')
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['task_subject', 'assigned_user', 'attachment', 'status', 'incident', 'due_date']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+
+    rows = Task.objects.all().values_list('task_subject', 'assigned_user', 'attachment', 'status', 'incident', 'due_date')
+    # import pdb;pdb.set_trace()
+    for row in rows:
+        row_num += 1
+        for col_num in range(len(row)):
+            if col_num == 5:
+                due_date = row[col_num].strftime("%d/%m/%y")
+                ws.write(row_num, col_num, due_date, font_style)
+            else:
+                ws.write(row_num, col_num, row[col_num], font_style)
 
     wb.save(response)
     return response

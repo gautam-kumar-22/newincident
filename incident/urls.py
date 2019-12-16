@@ -24,5 +24,6 @@ urlpatterns = [
     path('blog-update/<int:pk>/', views.BlogUpdateView.as_view(), name='blog-update'),
     path('blog-list/', views.BlogListView.as_view(), name='blog-list'),
     path('blog-delete/<int:pk>/', ajax.BlogDeleteView.as_view(), name='blog-delete'),
-    path('export/xls/', views.export_incident_xls, name='export_incident_xls'),
+    path('export/xls/incident/', views.export_incident_xls, name='export_incident_xls'),
+    path('export/xls/task/', views.export_task_xls, name='export_task_xls'),
 ]
