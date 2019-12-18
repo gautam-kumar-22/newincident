@@ -8,7 +8,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.template import RequestContext
-from django.views.generic.edit import CreateView, UpdateView, FormView
+from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 from django.core.paginator import Paginator
@@ -18,8 +19,8 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 from .utils import Calendar
-from .forms import IncidentForm, TaskForm, TaskFormSet, BlogForm
-# , RelatedipForm, RelateddomainForm
+from .forms import IncidentForm, BlogForm, RelatedipFormSet, RelateddomainFormSet, TaskFormSet
+# RelatedipForm, RelateddomainForm , TaskFormSet
 from users_profile.views import BaseLoginRequired
 
 import calendar
@@ -28,47 +29,111 @@ import pytz
 import xlwt
 
 
-class CreateIncidentView(BaseLoginRequired, CreateView):
-    """Create incident view."""
-
+class CreateIncidentView(CreateView):
+    template_name = 'incident_add.html'
     model = Incident
-    template_name = 'create_incident.html'
     form_class = IncidentForm
     success_url = None
 
-    def get_context_data(self, **kwargs):
-        data = super(CreateIncidentView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            data['titles'] = TaskFormSet(self.request.POST, self.request.FILES)
-            # data['relatedip'] = RelatedipForm(self.request.POST)
-            # data['domain'] = RelateddomainForm(self.request.POST)
-        else:
-            data['titles'] = TaskFormSet()
-            # data['relatedip'] = RelatedipForm()
-            # data['domain'] = RelateddomainForm()
-        return data
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        task_form = TaskFormSet()
+        relatedip_form = RelatedipFormSet()
+        relateddomain_form = RelateddomainFormSet()
+        return self.render_to_response(self.get_context_data(
+            form=form, task_form=task_form, relatedip_form=relatedip_form, relateddomain_form=relateddomain_form))
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        titles = context['titles']
-        # relatedip = context['relatedip']
-        # domain = context['domain']
-        with transaction.atomic():
-            form.instance.created_by = self.request.user
-            self.object = form.save()
-            if titles.is_valid():
-                titles.instance = self.object
-                titles.save()
-            # if relatedip.is_valid():
-            #     relatedip.instance = self.object
-            #     relatedip.save()
-            # if titles.is_valid():
-            #     domain.instance = self.object
-            #     domain.save()
-        return super(CreateIncidentView, self).form_valid(form)
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        task_form = TaskFormSet(self.request.POST, self.request.FILES)
+        relatedip_form = RelatedipFormSet(self.request.POST)
+        relateddomain_form = RelateddomainFormSet(self.request.POST)
+        import pdb;pdb.set_trace()
+        if (form.is_valid() and task_form.is_valid() and relatedip_form.is_valid() and relateddomain_form.is_valid()):
+            return self.form_valid(form, task_form, relatedip_form, relateddomain_form)
+        else:
+            return self.form_invalid(form, task_form, relatedip_form, relateddomain_form)
+
+    def form_valid(self, form, task_form, relatedip_form, relateddomain_form):
+        """
+        Called if all forms are valid. Creates a Recipe instance along with
+        associated Ingredients and Instructions and then redirects to a
+        success page.
+        """
+        self.object = form.save()
+        task_form.instance = self.object
+        task_form.save()
+        relatedip_form.instance = self.object
+        relatedip_form.save()
+        relateddomain_form.instance = self.object
+        relateddomain_form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, task_form, relatedip_form, relateddomain_form):
+        """
+        Called if a form is invalid. Re-renders the context data with the
+        data-filled forms and errors.
+        """
+        return self.render_to_response(self.get_context_data(
+            form=form, task_form=task_form, relatedip_form=relatedip_form, relateddomain_form=relateddomain_form))
 
     def get_success_url(self):
         return reverse_lazy('list-incident')
+
+# class CreateIncidentView(BaseLoginRequired, CreateView):
+#     """Create incident view."""
+
+#     model = Incident
+#     template_name = 'create_incident.html'
+#     form_class = IncidentForm
+#     success_url = None
+
+#     def get_context_data(self, **kwargs):
+#         data = super(CreateIncidentView, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['titles'] = TaskFormSet(self.request.POST, self.request.FILES)
+#             # data['relatedip'] = RelatedipForm(self.request.POST)
+#             # data['domain'] = RelateddomainForm(self.request.POST)
+#         else:
+#             data['titles'] = TaskFormSet()
+#             # data['relatedip'] = RelatedipForm()
+#             # data['domain'] = RelateddomainForm()
+#         return data
+
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         titles = context['titles']
+#         # relatedip = context['relatedip']
+#         # domain = context['domain']
+#         with transaction.atomic():
+#             form.instance.created_by = self.request.user
+#             self.object = form.save()
+#             if titles.is_valid():
+#                 titles.instance = self.object
+#                 titles.save()
+#             # if relatedip.is_valid():
+#             #     relatedip.instance = self.object
+#             #     relatedip.save()
+#             # if titles.is_valid():
+#             #     domain.instance = self.object
+#             #     domain.save()
+#         return super(CreateIncidentView, self).form_valid(form)
+
+    # def get_success_url(self):
+    #     return reverse_lazy('list-incident')
 
 
 class UpdateIncidentView(BaseLoginRequired, UpdateView):
