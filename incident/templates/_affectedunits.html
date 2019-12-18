@@ -1,0 +1,6 @@
+{% block content %}
+	<option value="" selected="">---------</option>
+	{% for affectedunit in affected_units %}
+	<option value="{{affectedunit.id}}">{{affectedunit.unit}}</option>
+	{% endfor %}
+{% endblock %}

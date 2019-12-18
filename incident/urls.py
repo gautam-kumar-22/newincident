@@ -26,4 +26,5 @@ urlpatterns = [
     path('blog-delete/<int:pk>/', ajax.BlogDeleteView.as_view(), name='blog-delete'),
     path('export/xls/incident/', views.export_incident_xls, name='export_incident_xls'),
     path('export/xls/task/', views.export_task_xls, name='export_task_xls'),
+    path('get-affected-unit/', ajax.GetAffectedUnit.as_view(), name='get-affected-unit'),
 ]

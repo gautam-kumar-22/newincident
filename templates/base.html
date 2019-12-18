@@ -6,7 +6,9 @@
 	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block title %}Project{% endblock %}</title>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 	<script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
@@ -27,7 +29,8 @@
 	<script type="text/javascript" src="{% static 'js/dataTables.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/bootbox.js' %}" ></script>
 	<script type="text/javascript" src="{% static 'js/jquery-ui.js' %}"></script>
-	<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 	
 	{% block js %}
 		

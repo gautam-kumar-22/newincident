@@ -96,7 +96,7 @@
 
                         {{ form.due_date.errors }}
                         {{ form.due_date.label_tag }}
-                        {{ form.due_date |add_class:'form-control col-sm-1' }}
+                        {{ form.due_date |add_class:'form-control col-sm-1 task_due_date' }}
 
                         {{ form.attachment.errors }}
                         {{ form.attachment.label_tag }}
@@ -141,18 +141,46 @@
 {% endblock %}
 
 {% block js %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
 <script src="{% static 'js/jquery.formset.js' %}"></script>
 <script type="text/javascript">
+
+	function renewDatePickers() {
+        $('.task_due_date').datepicker('destroy');
+        $(".task_due_date").datepicker({dateFormat: 'dd-mm-yy'});
+    }
+    $(renewDatePickers);
+
 	$(function() {
-            $(".inline.{{ task_form.prefix }}").formset({
-                prefix: "{{ task_form.prefix }}",
-            })
-            $(".inline.{{ relatedip_form.prefix }}").formset({
-                prefix: "{{ relatedip_form.prefix }}",
-            })
-            $(".inline.{{ relateddomain_form.prefix }}").formset({
-                prefix: "{{ relateddomain_form.prefix }}",
-            })
+        $(".inline.{{ task_form.prefix }}").formset({
+            prefix: "{{ task_form.prefix }}",
+            added: renewDatePickers
         })
+        $(".inline.{{ relatedip_form.prefix }}").formset({
+            prefix: "{{ relatedip_form.prefix }}",
+        })
+        $(".inline.{{ relateddomain_form.prefix }}").formset({
+            prefix: "{{ relateddomain_form.prefix }}",
+        })
+    })
+
+    $('#id_timestamp').datetimepicker({format: 'd/m/Y H:m:s',});
+
+    $(document).ready(function() {
+    	$('#id_sector').on('change', function(){
+    		var sector_id = $(this).val()
+    		var url = '{% url "get-affected-unit" %}';
+    		$.ajax({
+    			url: url,
+    			type: "GET",
+    			data:{'sector_id':sector_id},
+    			success: function(response){
+    				$('#id_affectedunit').html(response['rendered_data'])
+    			}
+    		});
+    	});
+
+	});
 </script>
 {% endblock %}
