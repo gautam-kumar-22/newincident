@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags static %}
+{% block content %}
+<div class="col-lg-9">
+	<nav aria-label="breadcrumb" style="padding-top: 8%;">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Update Incident{% endblocktrans %}</li>
+		</ol>
+	</nav>
+    <div>
+        <h1>Update Incident</h1>
+        <form action="{% url 'edit-incident' form.instance.pk  %}" method="post" class="col-sm-12" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+            	<div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">subject:</label>
+                    <div class="col-sm-8">
+                        {{form.subject|add_class:'form-control'}}
+                        <span class='error-class'>{{form.subject.errors}}</span>
+                    </div>
+                </div>
+            	<div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">category:</label>
+                    <div class="col-sm-8">
+                        {{form.category|add_class:'form-control'}}
+                        <span class='error-class'>{{form.category.errors}}</span>
+                    </div>
+                </div>
+            	<div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">timestamp:</label>
+                    <div class="col-sm-8">
+                        {{form.timestamp|add_class:'form-control'}}
+                        <span class='error-class'>{{form.timestamp.errors}}</span>
+                    </div>
+                </div>
+            	<div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">sector:</label>
+                    <div class="col-sm-8">
+                        {{form.sector|add_class:'form-control'}}
+                        <span class='error-class'>{{form.sector.errors}}</span>
+                    </div>
+                </div>
+            	<div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">affectedunit:</label>
+                    <div class="col-sm-8">
+                        {{form.affectedunit|add_class:'form-control'}}
+                        <span class='error-class'>{{form.affectedunit.errors}}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">description:</label>
+                    <div class="col-sm-8">
+                        {{form.description|add_class:'form-control '}}
+                        <span class='error-class'>{{form.description.errors}}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">assigned_user:</label>
+                    <div class="col-sm-8">
+                        {{form.assigned_user|add_class:'form-control'}}
+                        <span class='error-class'>{{form.assigned_user.errors}}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">status:</label>
+                    <div class="col-sm-8">
+                        {{form.status|add_class:'form-control'}}
+                        <span class='error-class'>{{form.status.errors}}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="firstName" class="col-sm-3 control-label">attachment:</label>
+                    <div class="col-sm-8">
+                        {{form.attachment}}
+                        <span class='error-class'>{{form.attachment.errors}}</span>
+                    </div>
+                </div>
+            </div>
+            <fieldset>
+                <legend>Task</legend>
+                {{ task_form.management_form }}
+                {{ task_form.non_form_errors }}
+                {% for form in task_form %}
+                    {{ form.id }}
+                    <div class="inline {{ task_form.prefix }} row">
+                        {{ form.task_subject.errors }}
+                        {{ form.task_subject.label_tag }}
+                        {{ form.task_subject |add_class:'form-control col-sm-2' }}
+
+                        {{ form.assigned_user.errors }}
+                        {{ form.assigned_user.label_tag }}
+                        {{ form.assigned_user |add_class:'form-control col-sm-1' }}
+
+                        {{ form.due_date.errors }}
+                        {{ form.due_date.label_tag }}
+                        {{ form.due_date |add_class:'form-control col-sm-1 task_due_date' }}
+
+                        {{ form.attachment.errors }}
+                        {{ form.attachment.label_tag }}
+                        {{ form.attachment |add_class:'col-sm-1' }}
+
+                        {{ form.status.errors }}
+                        {{ form.status.label_tag }}
+                        {{ form.status |add_class:'form-control col-sm-1' }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <fieldset>
+                <legend>Relatedip</legend>
+                {{ relatedip_form.management_form }}
+                {{ relatedip_form.non_form_errors }}
+                {% for form in relatedip_form %}
+                    {{ form.id }}
+                    <div class="inline {{ relatedip_form.prefix }} row">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag  }}
+                        {{ form.name |add_class:'form-control col-sm-6' }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <fieldset>
+                <legend>related Domain</legend>
+                {{ relateddomain_form.management_form }}
+                {{ relateddomain_form.non_form_errors }}
+                {% for form in relateddomain_form %}
+                    {{ form.id }}
+                    <div class="col-sm-12 inline {{ relateddomain_form.prefix }} row">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name |add_class:'form-control col-sm-6'}}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <input type="submit" value="Update" class="submit" />
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+
+	function renewDatePickers() {
+        $('.task_due_date').datepicker('destroy');
+        $(".task_due_date").datepicker({dateFormat: 'dd/mm/yy'});
+    }
+    $(renewDatePickers);
+
+	$(function() {
+        $(".inline.{{ task_form.prefix }}").formset({
+            prefix: "{{ task_form.prefix }}",
+            added: renewDatePickers
+        })
+        $(".inline.{{ relatedip_form.prefix }}").formset({
+            prefix: "{{ relatedip_form.prefix }}",
+        })
+        $(".inline.{{ relateddomain_form.prefix }}").formset({
+            prefix: "{{ relateddomain_form.prefix }}",
+        })
+    })
+
+    $('#id_timestamp').datetimepicker({format: 'd/m/Y H:m:s',});
+
+    $(document).ready(function() {
+    	$('#id_sector').on('change', function(){
+    		var sector_id = $(this).val()
+    		var url = '{% url "get-affected-unit" %}';
+    		$.ajax({
+    			url: url,
+    			type: "GET",
+    			data:{'sector_id':sector_id},
+    			success: function(response){
+    				$('#id_affectedunit').html(response['rendered_data'])
+    			}
+    		});
+    	});
+
+        function set_date(){
+            var currentdate = new Date(); 
+            var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth()+1)  + "/" 
+                        + currentdate.getFullYear() + " " 
+                        + currentdate.getHours() + ":"  
+                        + currentdate.getMinutes() + ":" 
+                        + currentdate.getSeconds();
+            $('#id_timestamp').val(datetime);
+        }
+        set_date()
+
+	});
+</script>
+{% endblock %}

@@ -93,6 +93,47 @@ class CreateIncidentView(CreateView):
         return reverse_lazy('list-incident')
 
 
+class UpdateIncidentView(UpdateView):
+    model = Incident
+    form_class = IncidentForm
+    template_name = 'edit_incident.html'
+    success_url = None
+
+    def get_success_url(self):
+        return reverse_lazy('list-incident')
+
+    # def get_object(self):
+    #     import pdb;pdb.set_trace()
+    #     return #your object
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateIncidentView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['task_form'] = TaskFormSet(self.request.POST, self.request.FILES, instance=self.object)
+            context['relatedip_form'] = RelatedipFormSet(self.request.POST, instance=self.object)
+            context['relateddomain_form'] = RelateddomainFormSet(self.request.POST, instance=self.object)
+        else:
+            context['task_form'] = TaskFormSet(instance=self.object)
+            context['relatedip_form'] = RelatedipFormSet(instance=self.object)
+            context['relateddomain_form'] = RelateddomainFormSet(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        task_form = context['task_form']
+        relatedip_form = context['relatedip_form']
+        relateddomain_form = context['relateddomain_form']
+        if task_form.is_valid() and relatedip_form.is_valid() and relateddomain_form.is_valid():
+            self.object = form.save()
+            task_form.instance = self.object
+            task_form.save()
+            relatedip_form.instance = self.object
+            relatedip_form.save()
+            relateddomain_form.instance = self.object
+            relateddomain_form.save()
+        return super(UpdateIncidentView, self).form_valid(form)
+
+
 # class CreateIncidentView(BaseLoginRequired, CreateView):
 #     """Create incident view."""
 
@@ -136,35 +177,35 @@ class CreateIncidentView(CreateView):
     #     return reverse_lazy('list-incident')
 
 
-class UpdateIncidentView(BaseLoginRequired, UpdateView):
-    """Update incident view."""
+# class UpdateIncidentView(BaseLoginRequired, UpdateView):
+#     """Update incident view."""
 
-    model = Incident
-    template_name = 'create_incident.html'
-    form_class = IncidentForm
-    success_url = None
+#     model = Incident
+#     template_name = 'create_incident.html'
+#     form_class = IncidentForm
+#     success_url = None
 
-    def get_context_data(self, **kwargs):
-        data = super(UpdateIncidentView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            data['titles'] = TaskFormSet(self.request.POST, self.request.FILES, instance=self.object)
-        else:
-            data['titles'] = TaskFormSet(instance=self.object)
-        return data
+#     def get_context_data(self, **kwargs):
+#         data = super(UpdateIncidentView, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['titles'] = TaskFormSet(self.request.POST, self.request.FILES, instance=self.object)
+#         else:
+#             data['titles'] = TaskFormSet(instance=self.object)
+#         return data
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        titles = context['titles']
-        with transaction.atomic():
-            form.instance.created_by = self.request.user
-            self.object = form.save()
-            if titles.is_valid():
-                titles.instance = self.object
-                titles.save()
-        return super(UpdateIncidentView, self).form_valid(form)
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         titles = context['titles']
+#         with transaction.atomic():
+#             form.instance.created_by = self.request.user
+#             self.object = form.save()
+#             if titles.is_valid():
+#                 titles.instance = self.object
+#                 titles.save()
+#         return super(UpdateIncidentView, self).form_valid(form)
 
-    def get_success_url(self):
-        return reverse_lazy('list-incident')
+#     def get_success_url(self):
+#         return reverse_lazy('list-incident')
 
 
 class ListIncidentView(BaseLoginRequired, ListView):
