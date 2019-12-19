@@ -12,11 +12,13 @@ import datetime
 class IncidentForm(forms.ModelForm):
     """Incident model form."""
 
+    timestamp = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M:%S'])
+
     def __init__(self, *args, **kwargs):
         super(IncidentForm, self).__init__(*args, **kwargs)
         dt = datetime.datetime.now()
         self.fields['assigned_user'].queryset = self.fields['assigned_user'].queryset.filter(is_active=True).exclude(is_superuser=True)
-        # self.fields['timestamp'].initial = dt.strftime('%d/%m/%Y %H:%M:%S')
+        self.fields['timestamp'].initial = dt.strftime('%d/%m/%Y %H:%M:%S')
         # self.fields['timestamp'].required = True
 
     # def clean_timestamp(self):
@@ -32,9 +34,16 @@ class IncidentForm(forms.ModelForm):
 
 class TaskForm(forms.ModelForm):
 
+    # due_date = forms.DateTimeField(input_formats=['%d/%m/%Y'])
+
+    # def clean_due_date(self):
+    #     import pdb;pdb.set_trace()
+    #     data = self.cleaned_data['due_date']
+    #     return data
+
     class Meta:
         model = Task
-        exclude = ()
+        fields = ('task_subject', 'assigned_user', 'due_date', 'status', 'attachment',)
 
 TaskFormSet = inlineformset_factory(
     Incident, Task, form=TaskForm,
