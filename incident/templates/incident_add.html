@@ -12,7 +12,7 @@
 	</nav>
     <div>
         <h1>Create Incident</h1>
-        <form action="." method="post" class="col-sm-12">
+        <form action="." method="post" class="col-sm-12" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
             	<div class="form-group row">
@@ -148,7 +148,7 @@
 
 	function renewDatePickers() {
         $('.task_due_date').datepicker('destroy');
-        $(".task_due_date").datepicker({dateFormat: 'dd-mm-yy'});
+        $(".task_due_date").datepicker({dateFormat: 'dd/mm/yy'});
     }
     $(renewDatePickers);
 

@@ -37,7 +37,7 @@ msgstr "وحدة"
 
 #: incident/models.py:44
 msgid "AffectedUnit"
-msgstr "الوحدة المتأثرة"
+msgstr "الجهة المتاثرة"
 
 #: incident/models.py:45
 msgid "AffectedUnits"
@@ -101,7 +101,7 @@ msgstr "موضوع المهمة"
 
 #: incident/models.py:116
 msgid "due_date"
-msgstr "تاريخ الاستحقاق"
+msgstr "تاريخ الحادث"
 
 #: incident/models.py:129
 msgid "comment"
@@ -168,7 +168,7 @@ msgid "sign-in"
 msgstr "تسجيل الدخول"
 
 msgid "login"
-msgstr "تسجيل الدخول"
+msgstr "الدخول الى نظام مسبار"
 
 msgid "Welcome"
 msgstr "أهلا بك"
@@ -182,11 +182,11 @@ msgstr "مهام"
 
 
 msgid "Report"
-msgstr "أبلغ عن"
+msgstr "البيانات التفاعلية"
 
 
 msgid "Admin"
-msgstr "مشرف"
+msgstr "لوحة التحكم"
 
 msgid "Calender"
 msgstr "التقويم"
@@ -252,13 +252,13 @@ msgid "remove"
 msgstr "إزالة"
 
 msgid "My Incident"
-msgstr "حادثة بلدي"
+msgstr "الحوادث الموكلة لي"
 
 msgid "Calendar"
 msgstr "التقويم"
 
 msgid "Blog"
-msgstr "مدونة"
+msgstr "مركز مشاركة المعرفة"
 
 msgid "New Blog"
 msgstr "مدونة جديدة"

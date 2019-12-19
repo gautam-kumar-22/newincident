@@ -58,11 +58,9 @@ class CreateIncidentView(CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        # form = form(self.request.POST, self.request.FILES)
         task_form = TaskFormSet(self.request.POST, self.request.FILES)
         relatedip_form = RelatedipFormSet(self.request.POST)
         relateddomain_form = RelateddomainFormSet(self.request.POST)
-        # import pdb;pdb.set_trace()
         if (form.is_valid() and task_form.is_valid() and relatedip_form.is_valid() and relateddomain_form.is_valid()):
             return self.form_valid(form, task_form, relatedip_form, relateddomain_form)
         else:
@@ -74,7 +72,6 @@ class CreateIncidentView(CreateView):
         associated Ingredients and Instructions and then redirects to a
         success page.
         """
-        # import pdb;pdb.set_trace()
         self.object = form.save()
         task_form.instance = self.object
         task_form.save()
@@ -94,6 +91,7 @@ class CreateIncidentView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('list-incident')
+
 
 # class CreateIncidentView(BaseLoginRequired, CreateView):
 #     """Create incident view."""
