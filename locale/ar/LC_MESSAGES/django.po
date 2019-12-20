@@ -230,7 +230,7 @@ msgstr "تعليق:"
 msgid "Submit"
 msgstr "خضع"
 
-msgid "TASKS CHART UPON STATUS"az
+msgid "TASKS CHART UPON STATUS"
 msgstr "المهام الرسم البياني على الوضع"
 
 msgid "INCIDENT CHART UPON STATUS"
@@ -262,15 +262,3 @@ msgstr "مركز مشاركة المعرفة"
 
 msgid "New Blog"
 msgstr "مدونة جديدة"
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
