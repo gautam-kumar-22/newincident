@@ -4,19 +4,6 @@
     height: 100%;
 }
 
-.login-button{
-	color: black;
-	background-color: #FFC312;
-	width: 100px;
-}
-
-.login-button:hover{
-	color: black;
-	background-color: white;
-}
-.login-form {
-    padding-top: 16%;
-}
 /* -----------header css--------------- */
 .bs-example{
 	background-color: #243165;

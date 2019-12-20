@@ -20,7 +20,6 @@ from django.utils.safestring import mark_safe
 from .models import *
 from .utils import Calendar
 from .forms import IncidentForm, BlogForm, RelatedipFormSet, RelateddomainFormSet, TaskFormSet
-# RelatedipForm, RelateddomainForm , TaskFormSet
 from users_profile.views import BaseLoginRequired
 
 import calendar
@@ -102,10 +101,6 @@ class UpdateIncidentView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('list-incident')
 
-    # def get_object(self):
-    #     import pdb;pdb.set_trace()
-    #     return #your object
-
     def get_context_data(self, **kwargs):
         context = super(UpdateIncidentView, self).get_context_data(**kwargs)
         if self.request.POST:
@@ -134,85 +129,10 @@ class UpdateIncidentView(UpdateView):
         return super(UpdateIncidentView, self).form_valid(form)
 
 
-# class CreateIncidentView(BaseLoginRequired, CreateView):
-#     """Create incident view."""
-
-#     model = Incident
-#     template_name = 'create_incident.html'
-#     form_class = IncidentForm
-#     success_url = None
-
-#     def get_context_data(self, **kwargs):
-#         data = super(CreateIncidentView, self).get_context_data(**kwargs)
-#         if self.request.POST:
-#             data['titles'] = TaskFormSet(self.request.POST, self.request.FILES)
-#             # data['relatedip'] = RelatedipForm(self.request.POST)
-#             # data['domain'] = RelateddomainForm(self.request.POST)
-#         else:
-#             data['titles'] = TaskFormSet()
-#             # data['relatedip'] = RelatedipForm()
-#             # data['domain'] = RelateddomainForm()
-#         return data
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         titles = context['titles']
-#         # relatedip = context['relatedip']
-#         # domain = context['domain']
-#         with transaction.atomic():
-#             form.instance.created_by = self.request.user
-#             self.object = form.save()
-#             if titles.is_valid():
-#                 titles.instance = self.object
-#                 titles.save()
-#             # if relatedip.is_valid():
-#             #     relatedip.instance = self.object
-#             #     relatedip.save()
-#             # if titles.is_valid():
-#             #     domain.instance = self.object
-#             #     domain.save()
-#         return super(CreateIncidentView, self).form_valid(form)
-
-    # def get_success_url(self):
-    #     return reverse_lazy('list-incident')
-
-
-# class UpdateIncidentView(BaseLoginRequired, UpdateView):
-#     """Update incident view."""
-
-#     model = Incident
-#     template_name = 'create_incident.html'
-#     form_class = IncidentForm
-#     success_url = None
-
-#     def get_context_data(self, **kwargs):
-#         data = super(UpdateIncidentView, self).get_context_data(**kwargs)
-#         if self.request.POST:
-#             data['titles'] = TaskFormSet(self.request.POST, self.request.FILES, instance=self.object)
-#         else:
-#             data['titles'] = TaskFormSet(instance=self.object)
-#         return data
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         titles = context['titles']
-#         with transaction.atomic():
-#             form.instance.created_by = self.request.user
-#             self.object = form.save()
-#             if titles.is_valid():
-#                 titles.instance = self.object
-#                 titles.save()
-#         return super(UpdateIncidentView, self).form_valid(form)
-
-#     def get_success_url(self):
-#         return reverse_lazy('list-incident')
-
-
 class ListIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    # paginate_by = 20
 
     def get_context_data(self, **kwargs):
         """Add section data in context."""
@@ -228,6 +148,8 @@ class IncidentDetailView(BaseLoginRequired, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(IncidentDetailView, self).get_context_data(**kwargs)
+        context['related_ips'] = Related_ip.objects.filter(incident=context['incident'])
+        context['related_domains'] = Related_domain.objects.filter(incident=context['incident'])
         context['all_comment'] = Comment.objects.filter(incident=context['incident']).order_by('created_on')
         return context
 
@@ -236,7 +158,6 @@ class OpenIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    # paginate_by = 20
 
     def get_queryset(self):
         incidents_list = Incident.objects.filter(status='open')
@@ -253,7 +174,6 @@ class ClosedIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    # paginate_by = 20
 
     def get_queryset(self):
         incidents_list = Incident.objects.filter(status='closed')
@@ -270,7 +190,6 @@ class InprogressIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    # paginate_by = 20
 
     def get_queryset(self):
         incidents_list = Incident.objects.filter(status='in_progress')
@@ -286,7 +205,6 @@ class PendingIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    # paginate_by = 20
 
     def get_queryset(self):
         incidents_list = Incident.objects.filter(status='pending')
@@ -303,7 +221,6 @@ class LatestIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    paginate_by = 20
 
     def get_queryset(self):
         date_from = datetime.datetime.now() - datetime.timedelta(days=1)
@@ -322,7 +239,6 @@ class MyIncidentView(BaseLoginRequired, ListView):
     model = Incident
     template_name = "incident_list.html"
     context_object_name = 'incidents_list'
-    paginate_by = 20
 
     def get_queryset(self):
         date_from = datetime.datetime.now() - datetime.timedelta(days=1)
@@ -337,11 +253,22 @@ class MyIncidentView(BaseLoginRequired, ListView):
         return context
 
 
-class OpenTaskView(BaseLoginRequired, ListView):
-    model = Incident
+class AllTaskView(BaseLoginRequired, ListView):
+    model = Task
     template_name = "task_list.html"
     context_object_name = 'tasks_list'
-    # paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        """Add section data in context."""
+        context = super(AllTaskView, self).get_context_data(**kwargs)
+        context['all_task'] = 'all_task'
+        return context
+
+
+class OpenTaskView(BaseLoginRequired, ListView):
+    model = Task
+    template_name = "task_list.html"
+    context_object_name = 'tasks_list'
 
     def get_queryset(self):
         tasks_list = Task.objects.filter(status='open')
@@ -355,10 +282,9 @@ class OpenTaskView(BaseLoginRequired, ListView):
 
 
 class MyTaskView(BaseLoginRequired, ListView):
-    model = Incident
+    model = Task
     template_name = "task_list.html"
     context_object_name = 'tasks_list'
-    # paginate_by = 20
 
     def get_queryset(self):
         tasks_list = Task.objects.filter(assigned_user=self.request.user)
@@ -542,7 +468,6 @@ def export_task_xls(request):
     font_style = xlwt.XFStyle()
 
     rows = Task.objects.all().values_list('task_subject', 'assigned_user', 'attachment', 'status', 'incident', 'due_date')
-    # import pdb;pdb.set_trace()
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):

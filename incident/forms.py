@@ -12,7 +12,7 @@ import datetime
 class IncidentForm(forms.ModelForm):
     """Incident model form."""
 
-    timestamp = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M:%S'])
+    timestamp = forms.DateTimeField(widget=forms.DateInput(format='%d/%m/%Y %H:%M:%S'), input_formats=('%d/%m/%Y %H:%M:%S', ))
 
     def __init__(self, *args, **kwargs):
         super(IncidentForm, self).__init__(*args, **kwargs)
@@ -27,7 +27,7 @@ class IncidentForm(forms.ModelForm):
 
 class TaskForm(forms.ModelForm):
 
-    due_date = forms.DateField(input_formats=['%d/%m/%Y'], required=False)
+    due_date = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=('%d/%m/%Y', ))
 
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)

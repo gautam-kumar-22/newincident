@@ -9,6 +9,8 @@
 				<li class="breadcrumb-item active" aria-current="page">Open Tasks</li>
 			{% elif my_task %}
 				<li class="breadcrumb-item active" aria-current="page">my Tasks</li>
+			{% elif all_task %}
+				<li class="breadcrumb-item active" aria-current="page">All Tasks</li>
 			{% endif %}
 		</ol>
 	</nav>
@@ -24,7 +26,6 @@
 			<th>status</th>
 			<th>Due Date</th>
 			<th>Incident Name</th>
-			<th>attachment</th>
 		</thead>
 		<tbody>
 			{% for task in tasks_list %}
@@ -35,7 +36,6 @@
 					<td>{{task.status}}</td>
 					<td>{{task.due_date}}</td>
 					<td>{{task.incident.subject}}</td>
-					<td><a href="#">{{task.attachment}}</a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

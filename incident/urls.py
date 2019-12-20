@@ -15,6 +15,7 @@ urlpatterns = [
     path('pending-incident/', views.PendingIncidentView.as_view(), name='pending-incident'),
     path('latest-incident/', views.LatestIncidentView.as_view(), name='latest-incident'),
     path('my-incident/', views.MyIncidentView.as_view(), name='my-incident'),
+    path('all-task/', views.AllTaskView.as_view(), name='all-task'),
     path('open-task/', views.OpenTaskView.as_view(), name='open-task'),
     path('my-task/', views.MyTaskView.as_view(), name='my-task'),
     path('add-comment/', ajax.AddCommentView.as_view(), name='add-comment'),

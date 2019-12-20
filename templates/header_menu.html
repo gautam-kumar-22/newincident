@@ -12,7 +12,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-item nav-link" href="{% url 'dashboard' %}">Logo</a>
+            <a class="nav-item nav-link header-logo" href="{% url 'dashboard' %}"><img src="/static/images/logo.png" style="background: #fff; width: 66%; height: 100px;"></a>
         </li>
         <li class="nav-item">
             <a class="nav-item nav-link" href="{% url 'dashboard' %}"><span class="d-none d-sm-inline">{% blocktrans %}Dashboard{% endblocktrans %}</span></a>
@@ -49,6 +49,9 @@
             <a class="nav-link collapsed text-truncate" href="#" data-toggle="collapse" data-target="#submenu2"><span class="d-none d-sm-inline">{% blocktrans %}Tasks{% endblocktrans %}</span></a>
             <div class="collapse" id="submenu2" aria-expanded="false">
                 <ul class="flex-column pl-2 nav">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed py-1" href="{% url 'all-task' %}"><span>{% blocktrans %}All tasks {% endblocktrans %}</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link collapsed py-1" href="{% url 'open-task' %}"><span>{% blocktrans %}Open tasks {% endblocktrans %}</span></a>
                     </li>

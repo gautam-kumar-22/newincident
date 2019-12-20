@@ -56,6 +56,18 @@
                 <td>{{ object.assigned_user }}</td>
             </tr>
             {% endif %}
+            <tr>
+                <th>{% blocktrans %}RealtedIp{% endblocktrans %}</th>
+                {% for object in related_ips %}
+                <td>{{forloop.counter}}.&nbsp;{{ object.name }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>{% blocktrans %}RealtedDomain{% endblocktrans %}</th>
+                {% for object in related_domains %}
+                <td>{{forloop.counter}}.&nbsp;{{ object.name }}</td>
+                {% endfor %}
+            </tr>
             </table>
             </div>
     </div>

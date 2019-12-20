@@ -98,13 +98,14 @@
                         {{ form.due_date.label_tag }}
                         {{ form.due_date |add_class:'form-control col-sm-1 task_due_date' }}
 
+                        {{ form.status.errors }}
+                        {{ form.status.label_tag }}
+                        {{ form.status |add_class:'form-control col-sm-1' }}
+
                         {{ form.attachment.errors }}
                         {{ form.attachment.label_tag }}
                         {{ form.attachment |add_class:'col-sm-1' }}
 
-                        {{ form.status.errors }}
-                        {{ form.status.label_tag }}
-                        {{ form.status |add_class:'form-control col-sm-1' }}
                     </div>
                 {% endfor %}
             </fieldset>
@@ -181,17 +182,7 @@
     		});
     	});
 
-        function set_date(){
-            var currentdate = new Date(); 
-            var datetime = currentdate.getDate() + "/"
-                        + (currentdate.getMonth()+1)  + "/" 
-                        + currentdate.getFullYear() + " " 
-                        + currentdate.getHours() + ":"  
-                        + currentdate.getMinutes() + ":" 
-                        + currentdate.getSeconds();
-            $('#id_timestamp').val(datetime);
-        }
-        set_date()
+        
 
 	});
 </script>
