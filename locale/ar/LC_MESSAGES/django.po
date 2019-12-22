@@ -262,3 +262,51 @@ msgstr "مركز مشاركة المعرفة"
 
 msgid "New Blog"
 msgstr "مدونة جديدة"
+
+msgid "subject:"
+msgstr "الموضوع"
+
+msgid "category:"
+msgstr "فئة الحادث"
+
+msgid "timestamp:"
+msgstr "التاريخ"
+
+msgid "sector:"
+msgstr "القطاع"
+
+msgid "affectedunit:"
+msgstr "الجهة المتأثرة"
+
+msgid "description:"
+msgstr "الوصف العام"
+
+msgid "assigned_user:"
+msgstr "هالموكله لة"
+
+msgid "status:"
+msgstr "الحالة"
+
+msgid "attachment:"
+msgstr "المرفقات"
+
+msgid "Task"
+msgstr "المهام"
+
+msgid "users assigned :"
+msgstr "الموكل له"
+
+msgid "Relatedip"
+msgstr "عناوين الانترنت"
+
+msgid "related Domain"
+msgstr "النطاقات"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Update Incident"
+msgstr "تحديث الحادث"

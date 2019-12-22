@@ -11,61 +11,61 @@
 		</ol>
 	</nav>
     <div>
-        <h1>Update Incident</h1>
+        <h2>{% blocktrans %}Update Incident{% endblocktrans %}</h2>
         <form action="{% url 'edit-incident' form.instance.pk  %}" method="post" class="col-sm-12" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
             	<div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">subject:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}subject:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.subject|add_class:'form-control'}}
                         <span class='error-class'>{{form.subject.errors}}</span>
                     </div>
                 </div>
             	<div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">category:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}category:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.category|add_class:'form-control'}}
                         <span class='error-class'>{{form.category.errors}}</span>
                     </div>
                 </div>
             	<div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">timestamp:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}timestamp:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.timestamp|add_class:'form-control'}}
                         <span class='error-class'>{{form.timestamp.errors}}</span>
                     </div>
                 </div>
             	<div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">sector:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}sector:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.sector|add_class:'form-control'}}
                         <span class='error-class'>{{form.sector.errors}}</span>
                     </div>
                 </div>
             	<div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">affectedunit:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}affectedunit:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.affectedunit|add_class:'form-control'}}
                         <span class='error-class'>{{form.affectedunit.errors}}</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">description:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}description:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.description|add_class:'form-control '}}
                         <span class='error-class'>{{form.description.errors}}</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">assigned_user:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}assigned_user:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.assigned_user|add_class:'form-control'}}
                         <span class='error-class'>{{form.assigned_user.errors}}</span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">status:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}status:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.status|add_class:'form-control'}}
                         <span class='error-class'>{{form.status.errors}}</span>
@@ -73,7 +73,7 @@
                 </div>
 
                 <fieldset>
-                    <legend>Relatedip</legend>
+                    <legend>{% blocktrans %}Relatedip{% endblocktrans %}</legend>
                     {{ relatedip_form.management_form }}
                     {{ relatedip_form.non_form_errors }}
                     {% for form in relatedip_form %}
@@ -86,7 +86,7 @@
                     {% endfor %}
                 </fieldset>
                 <fieldset>
-                    <legend>related Domain</legend>
+                    <legend>{% blocktrans %}related Domain{% endblocktrans %}</legend>
                     {{ relateddomain_form.management_form }}
                     {{ relateddomain_form.non_form_errors }}
                     {% for form in relateddomain_form %}
@@ -100,7 +100,7 @@
                 </fieldset>
 
                 <div class="form-group row">
-                    <label for="firstName" class="col-sm-3 control-label">attachment:</label>
+                    <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}attachment:{% endblocktrans %}</label>
                     <div class="col-sm-8">
                         {{form.attachment}}
                         <span class='error-class'>{{form.attachment.errors}}</span>
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <fieldset>
-                <legend>Task</legend>
+                <legend>{% blocktrans %}Task{% endblocktrans %}</legend>
                 {{ task_form.management_form }}
                 {{ task_form.non_form_errors }}
                 {% for form in task_form %}
@@ -137,7 +137,7 @@
                     </div>
                 {% endfor %}
             </fieldset>
-            <input type="submit" value="Update" class="submit" />
+            <input type="submit" value="{% blocktrans %}Update{% endblocktrans %}" class="submit" />
         </form>
     </div>
 </div>
