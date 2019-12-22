@@ -41,9 +41,11 @@
 <script type="text/javascript">
 
 window.onload = function() {
+
 var open_task_count = parseInt($('#open_task_count').val());
 var inprogress_task_count = parseInt($('#inprogress_task_count').val());
 var close_task_count = parseInt($('#close_task_count').val());
+if (open_task_count != 0 || inprogress_task_count != 0|| close_task_count != 0){
 var status_task_options = {
 	// exportEnabled: true,
 	animationEnabled: true,
@@ -69,12 +71,17 @@ var status_task_options = {
 	}]
 };
 $("#StatusTaskContainer").CanvasJSChart(status_task_options);
+}
+else{
+	$("#StatusTaskContainer").html('<h4 class="heading" style="font-weight: bold; text-align: center;">{% blocktrans %}TASKS CHART UPON STATUS{% endblocktrans %}</h4> <h4 style="font-weight: bold; text-align: center; color: red;">"No data Found."</h4> ');
+}
 
 var open_incident_count = parseInt($('#open_incident_count').val());
 var closed_incident_count = parseInt($('#closed_incident_count').val());
 var inprogress_incident_count = parseInt($('#inprogress_incident_count').val());
 var pending_incident_count = parseInt($('#pending_incident_count').val());
 
+if (open_incident_count != 0 || closed_incident_count != 0 || inprogress_incident_count != 0 || pending_incident_count != 0){
 var status_incident_options = {
 	animationEnabled: true,
 	title:{
@@ -100,10 +107,14 @@ var status_incident_options = {
 	}]
 };
 $("#StatusIncidentContainer").CanvasJSChart(status_incident_options);
+}
+else{
+	$("#StatusIncidentContainer").html('<h4 class="heading" style="font-weight: bold; text-align: center;">{% blocktrans %}INCIDENT CHART UPON STATUS{% endblocktrans %}</h4> <h4 style="font-weight: bold; text-align: center; color: red;">"No data Found."</h4> ');
+}
 
 var active_user_count = parseInt($('#active_user_count').val());
 var inactive_user_count = parseInt($('#inactive_user_count').val());
-console.log(active_user_count, inactive_user_count);
+if (active_user_count != 0 || inactive_user_count != 0){
 var active_user_options = {
 	animationEnabled: true,
 	title:{
@@ -127,10 +138,16 @@ var active_user_options = {
 	}]
 };
 $("#ActiveUserContainer").CanvasJSChart(active_user_options);
+}
+else{
+	$("#ActiveUserContainer").html('<h4 class="heading" style="font-weight: bold; text-align: center;">{% blocktrans %}ACTIVE USER CHART{% endblocktrans %}</h4> <h4 style="font-weight: bold; text-align: center; color: red;">"No data Found."</h4> ');
+}
 
 var recent_open_task_count = parseInt($('#recent_open_task_count').val());
 var recent_inprogress_task_count = parseInt($('#recent_inprogress_task_count').val());
 var recent_close_task_count = parseInt($('#recent_close_task_count').val());
+
+if (recent_open_task_count != 0 || recent_inprogress_task_count != 0 || recent_close_task_count != 0){
 var recent_task_status_options = {
 	animationEnabled: true,
 	title:{
@@ -155,15 +172,27 @@ var recent_task_status_options = {
 	}]
 };
 $("#RecentTaskStatusContainer").CanvasJSChart(recent_task_status_options);
+}
+else{
+	$("#RecentTaskStatusContainer").html('<h4 class="heading" style="font-weight: bold; text-align: center;">{% blocktrans %}RECENT TASK STATUS CHART{% endblocktrans %}</h4> <h4 style="font-weight: bold; text-align: center; color: red;">"No data Found."</h4> ');
+}
+
+
 var incident_per_sector = new Array();
+var check_val = new Array();
 $('.sector_count').each(function(index, value){
 	var data = {y:$(this).val(), name:$(this).attr('id')};
 	incident_per_sector.push(data);
+	if ($(this).val() != 0){
+		check_val.push($(this).val());
+	}
 });
+
+if(check_val.length != 0){
 var incidents_per_sector_options = {
 	animationEnabled: true,
 	title:{
-		text: "{% blocktrans %}INICIDENT PER SECTOR CHART{% endblocktrans %}"
+		text: "{% blocktrans %}INCIDENT PER SECTOR CHART{% endblocktrans %}"
 	},
 	legend:{
 		horizontalAlign: "right",
@@ -180,7 +209,10 @@ var incidents_per_sector_options = {
 	}]
 };
 $("#IncidentChartPerSectorContainer").CanvasJSChart(incidents_per_sector_options);
-
+}
+else{
+	$("#IncidentChartPerSectorContainer").html('<h4 class="heading" style="font-weight: bold; text-align: center;">{% blocktrans %}INCIDENT PER SECTOR CHART{% endblocktrans %}</h4> <h4 style="font-weight: bold; text-align: center; color: red;">"No data Found."</h4> ');
+}
 }
 
 </script>

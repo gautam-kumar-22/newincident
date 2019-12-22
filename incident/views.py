@@ -326,7 +326,7 @@ class RecentTaskChartView(BaseLoginRequired, View):
         context['recent_task'] = Task.objects.filter(created_on=date_from)
         context['recent_open_task_count'] = context['recent_task'].filter(status='open').count()
         context['recent_inprogress_task_count'] = context['recent_task'].filter(status='in_progress').count()
-        context['recent_close_task_count'] = context['close_task'].filter(status='complete').count()
+        context['recent_close_task_count'] = context['recent_task'].filter(status='complete').count()
         # Incidents chart ( per sector )
         all_sector = Sector.objects.all()
         context['sector_count'] = []
