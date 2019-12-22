@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 {% load crispy_forms_tags static %}
 {% block content %}
-<div class="col-lg-9">
+<div class="col-lg-9" dir="rtl">
 	<nav aria-label="breadcrumb" style="padding-top: 8%;">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
@@ -80,7 +80,7 @@
                         {{ form.id }}
                         <div class="inline {{ relatedip_form.prefix }} row">
                             {{ form.name.errors }}
-                            {{ form.name.label_tag  }}
+                            <div class="col-sm-3">{{ form.name.label_tag }}</div>
                             {{ form.name |add_class:'form-control col-sm-6' }}
                         </div>
                     {% endfor %}
@@ -93,7 +93,7 @@
                         {{ form.id }}
                         <div class="col-sm-12 inline {{ relateddomain_form.prefix }} row">
                             {{ form.name.errors }}
-                            {{ form.name.label_tag }}
+                            <div class="col-sm-3">{{ form.name.label_tag }}</div>
                             {{ form.name |add_class:'form-control col-sm-6'}}
                         </div>
                     {% endfor %}
