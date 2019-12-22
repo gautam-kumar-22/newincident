@@ -26,7 +26,7 @@ SECRET_KEY = '!hk$d6=bn2j=9+$&6!etdrdlpv_-52f6h5x-y!#rol8bfvh^m+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 # Application definition
