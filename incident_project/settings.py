@@ -93,8 +93,8 @@ WSGI_APPLICATION = 'incident_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "incident_db",
-    	'USER': "postgres",
+        'NAME': "incident",
+    	'USER': "incident",
     	'PASSWORD': "download",
     	'HOST': "localhost",
     	'PORT': ''
@@ -147,11 +147,12 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 print(BASE_DIR)
+
 LOCALE_PATHS = (
    os.path.join(BASE_DIR, 'locale'),
 )
 # LANGUAGE_CODE = 'ar-ae'
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ar-ae'
 LANGUAGES = (
     ('ar', _('Arabic')),
     ('en', _('English')),
