@@ -11,10 +11,27 @@
 	</nav>
 	<div class="calendar-container">
 		<div class="clearfix">
-			<a class="btn btn-info left" href="?{{ prev_month }}"> Previous Month </a>
-			<a class="btn btn-info right" href="?{{ next_month }}"> Next Month </a>
+			<a class="btn btn-info left" href="?{{ prev_month }}"> << Previous Month </a>
+			<a class="btn btn-info right" href="?{{ next_month }}"> Next Month >> </a>
 		</div>
 		{{ calendar }}
 	</div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    	$('.calendar tr td ul li').each(function() {
+    	    if($(this).length != 0){
+    	    	$(this).parent().parent().addClass('color_date');
+    	    }
+    	    else{
+    	    	$(this).parent().parent().removeClass('color_date')
+    	    }
+    	});
+	});
+
+</script>
 {% endblock %}

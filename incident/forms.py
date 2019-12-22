@@ -31,8 +31,8 @@ class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
-        dt = datetime.datetime.now()
-        self.fields['due_date'].initial = dt.strftime('%d/%m/%Y')
+        # dt = datetime.datetime.now()
+        # self.fields['due_date'].initial = dt.strftime('%d/%m/%Y')
 
     class Meta:
         model = Task

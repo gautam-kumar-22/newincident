@@ -71,6 +71,34 @@
                         <span class='error-class'>{{form.status.errors}}</span>
                     </div>
                 </div>
+
+                <fieldset>
+                    <legend>Relatedip</legend>
+                    {{ relatedip_form.management_form }}
+                    {{ relatedip_form.non_form_errors }}
+                    {% for form in relatedip_form %}
+                        {{ form.id }}
+                        <div class="inline {{ relatedip_form.prefix }} row">
+                            {{ form.name.errors }}
+                            {{ form.name.label_tag  }}
+                            {{ form.name |add_class:'form-control col-sm-6' }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                <fieldset>
+                    <legend>related Domain</legend>
+                    {{ relateddomain_form.management_form }}
+                    {{ relateddomain_form.non_form_errors }}
+                    {% for form in relateddomain_form %}
+                        {{ form.id }}
+                        <div class="col-sm-12 inline {{ relateddomain_form.prefix }} row">
+                            {{ form.name.errors }}
+                            {{ form.name.label_tag }}
+                            {{ form.name |add_class:'form-control col-sm-6'}}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+
                 <div class="form-group row">
                     <label for="firstName" class="col-sm-3 control-label">attachment:</label>
                     <div class="col-sm-8">
@@ -108,32 +136,7 @@
                     </div>
                 {% endfor %}
             </fieldset>
-            <fieldset>
-                <legend>Relatedip</legend>
-                {{ relatedip_form.management_form }}
-                {{ relatedip_form.non_form_errors }}
-                {% for form in relatedip_form %}
-                    {{ form.id }}
-                    <div class="inline {{ relatedip_form.prefix }} row">
-                        {{ form.name.errors }}
-                        {{ form.name.label_tag  }}
-                        {{ form.name |add_class:'form-control col-sm-6' }}
-                    </div>
-                {% endfor %}
-            </fieldset>
-            <fieldset>
-                <legend>related Domain</legend>
-                {{ relateddomain_form.management_form }}
-                {{ relateddomain_form.non_form_errors }}
-                {% for form in relateddomain_form %}
-                    {{ form.id }}
-                    <div class="col-sm-12 inline {{ relateddomain_form.prefix }} row">
-                        {{ form.name.errors }}
-                        {{ form.name.label_tag }}
-                        {{ form.name |add_class:'form-control col-sm-6'}}
-                    </div>
-                {% endfor %}
-            </fieldset>
+            
             <input type="submit" value="Save" class="submit" />
         </form>
     </div>
@@ -153,15 +156,16 @@
     $(renewDatePickers);
 
 	$(function() {
-        $(".inline.{{ task_form.prefix }}").formset({
-            prefix: "{{ task_form.prefix }}",
-            added: renewDatePickers
-        })
+        
         $(".inline.{{ relatedip_form.prefix }}").formset({
             prefix: "{{ relatedip_form.prefix }}",
         })
         $(".inline.{{ relateddomain_form.prefix }}").formset({
             prefix: "{{ relateddomain_form.prefix }}",
+        })
+        $(".inline.{{ task_form.prefix }}").formset({
+            prefix: "{{ task_form.prefix }}",
+            added: renewDatePickers
         })
     })
 
