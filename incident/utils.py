@@ -15,21 +15,22 @@ class Calendar(HTMLCalendar):
 		tasks_per_day = tasks.filter(due_date__day=day)
 		d = ''
 		for incident in incidents_per_day:
-			d += f'<li> {incident.subject} </li>'
+			d += '<li> {subject} </li>'.format(subject=incident.subject)
 
 		for task in tasks_per_day:
-			d += f'<li> {task.task_subject} </li>'
+			d += '<li> {subject} </li>'.format(subject=task.task_subject)
 
 		if day != 0:
-			return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+			return "<td><span class='date'>{day}</span><ul> {d} </ul></td>".format(day=day, d=d)
 		return '<td></td>'
+		return d
 
 	# formats a week as a tr 
 	def formatweek(self, theweek, incidents, tasks):
 		week = ''
 		for d, weekday in theweek:
 			week += self.formatday(d, incidents, tasks)
-		return f'<tr> {week} </tr>'
+		return "<tr> {week} </tr>".format(week=week)
 
 	# formats a month as a table
 	# filter events by year and month
@@ -37,11 +38,11 @@ class Calendar(HTMLCalendar):
 		incidents =  Incident.objects.filter(timestamp__year=self.year, timestamp__month=self.month)
 		tasks =  Task.objects.filter(due_date__year=self.year, due_date__month=self.month)
 
-		cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
-		cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
-		cal += f'{self.formatweekheader()}\n'
-		for week in self.monthdays2calendar(self.year, self.month):
-			cal += f'{self.formatweek(week, incidents, tasks)}\n'
+		cal = '<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
+		# cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
+		# cal += f'{self.formatweekheader()}\n'
+		# for week in self.monthdays2calendar(self.year, self.month):
+		# 	cal += f'{self.formatweek(week, incidents, tasks)}\n'
 		return cal
 
 
