@@ -305,9 +305,6 @@ msgstr "النطاقات"
 msgid "Save"
 msgstr "حفظ"
 
-msgid "Update"
-msgstr "تحديث"
-
 msgid "Update Incident"
 msgstr "تحديث الحادث"
 
@@ -355,7 +352,3 @@ msgstr "الشهر الماضى"
 
 msgid "Next Month"
 msgstr "الشهر القادم"
-
-msgid ""
-msgstr ""
-
