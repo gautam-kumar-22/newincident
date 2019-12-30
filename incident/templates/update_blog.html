@@ -4,41 +4,41 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="col-lg-9">
+<div class="col-lg-9" dir="rtl">
 	<nav aria-label="breadcrumb" style="padding-top: 8%;">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
 			<li class="breadcrumb-item"><a href="{% url 'blog-list' %}">{% blocktrans %}Blog List{% endblocktrans %}</a></li>
-			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}UpdateBlog{% endblocktrans %}</li>
+			<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Update Blog{% endblocktrans %}</li>
 		</ol>
 	</nav>
 	<div class="blog-create-container">
 		<form action="{% url 'blog-update' form.instance.pk  %}"  method="POST" enctype="multipart/form-data" id="add_host" class="col-sm-12">
 			{% csrf_token %}
 			<div class="form-group row">
-		        <label for="firstName" class="col-sm-3 control-label">Blog Title:</label>
+		        <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}Blog Title:{% endblocktrans %}</label>
 		        <div class="col-sm-8">
 		            {{form.title|add_class:'form-control'}}
 		            <span class='error-class'>{{form.title.errors}}</span>
 		        </div>
 		    </div>
 		    <div class="form-group row">
-		        <label for="firstName" class="col-sm-3 control-label">Discription:</label>
+		        <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}Discription:{% endblocktrans %}</label>
 		        <div class="col-sm-8">
 		            {{form.discription|add_class:'form-control'}}
 		            <span class='error-class'>{{form.discription.errors}}</span>
 		        </div>
 		    </div>
 		    <div class="form-group row">
-		        <label for="firstName" class="col-sm-3 control-label">Is_enable:</label>
+		        <label for="firstName" class="col-sm-3 control-label">{% blocktrans %}Is enable:{% endblocktrans %}</label>
 		        <div class="col-sm-8">
 		            {{form.is_enable|add_class:'form-control'}}
 		            <span class='error-class'>{{form.is_enable.errors}}</span>
 		        </div>
 		    </div>
 		<div class="pull-left">
-			<button type="reset" class="btn btn-danger">Reset</button>
-			<button type="submit" class="btn btn-primary">Update</button>
+			<button type="reset" class="btn btn-danger">{% blocktrans %}Reset{% endblocktrans %}</button>
+			<button type="submit" class="btn btn-primary">{% blocktrans %}Update{% endblocktrans %}</button>
 		</div>
 		</form>
 	</div>

@@ -319,3 +319,43 @@ msgstr "حوادث التصدير"
 
 msgid "All tasks"
 msgstr "كل المهام"
+
+msgid "Realted Ip"
+msgstr "ذات الصلة ايب"
+
+msgid "Realted Domain"
+msgstr "المجال ذات الصلة"
+
+msgid "Blog List"
+msgstr "قائمة المدونة"
+
+msgid "Update Blog"
+msgstr "تحديث المدونة"
+
+msgid "Blog Title:"
+msgstr "عنوان المدونة:"
+
+msgid "Discription:"
+msgstr "ديسكريبأيشن:"
+
+msgid "Is enable:"
+msgstr "تمكين:"
+
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Create Blog"
+msgstr "انشاء مدونة"
+
+msgid "Previous Month"
+msgstr "الشهر الماضى"
+
+msgid "Next Month"
+msgstr "الشهر القادم"
+
+msgid ""
+msgstr ""
+

@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-<div class="col-lg-9 incident-list">
+<div class="col-lg-9 incident-list" dir="rtl">
 	<nav aria-label="breadcrumb" style="padding-top: 8%;">
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
 			{% if open_task %}
-				<li class="breadcrumb-item active" aria-current="page">Open Tasks</li>
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}Open tasks{% endblocktrans %}</li>
 			{% elif my_task %}
-				<li class="breadcrumb-item active" aria-current="page">my Tasks</li>
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}My tasks{% endblocktrans %}</li>
 			{% elif all_task %}
-				<li class="breadcrumb-item active" aria-current="page">All Tasks</li>
+				<li class="breadcrumb-item active" aria-current="page">{% blocktrans %}All tasks{% endblocktrans %}</li>
 			{% endif %}
 		</ol>
 	</nav>
 	<div class="pull-right">
-		<button class="btn btn-success print" style="margin-bottom: 12%;"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+		<button class="btn btn-success print" style="margin-bottom: 12%;"><i class="fa fa-print" aria-hidden="true"></i>{% blocktrans %} Print{% endblocktrans %}</button>
 	</div>
-	<a href="{% url 'export_task_xls' %}"><button class="btn btn-success export"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Task</button></a>
+	<a href="{% url 'export_task_xls' %}"><button class="btn btn-success export"><i class="fa fa-file-excel-o" aria-hidden="true"></i>{% blocktrans %} Export Task{% endblocktrans %}</button></a>
 	<table class="table table-striped" id="example" class="display" style="width:100%">
 		<thead>
 			<th>#</th>

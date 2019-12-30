@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n static %}
 {% block content %}
-<div class="col-lg-9">
+<div class="col-lg-9" dir="rtl">
     <nav aria-label="breadcrumb" style="padding-top: 8%;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
@@ -57,13 +57,13 @@
             </tr>
             {% endif %}
             <tr>
-                <th>{% blocktrans %}RealtedIp{% endblocktrans %}</th>
+                <th>{% blocktrans %}Realted Ip{% endblocktrans %}</th>
                 {% for object in related_ips %}
                 <td>{{forloop.counter}}.&nbsp;{{ object.name }}</td>
                 {% endfor %}
             </tr>
             <tr>
-                <th>{% blocktrans %}RealtedDomain{% endblocktrans %}</th>
+                <th>{% blocktrans %}Realted Domain{% endblocktrans %}</th>
                 {% for object in related_domains %}
                 <td>{{forloop.counter}}.&nbsp;{{ object.name }}</td>
                 {% endfor %}
@@ -73,12 +73,12 @@
     </div>
     <div class="comment-section">
         {% for comment_obj in all_comment %}
-            <div class="comment" style="margin: 2%; background-color: #fff;">
+            <div class="comment" style="margin: 2%; background-color: #fff; ">
                 <div class="comment-text">{{comment_obj.comment}}</div>
                 <div style="font-weight: bold;">{{comment_obj.user}}{{comment_obj.created_on}}</div>
             </div>
         {% endfor %}
-        <div class="my-comment">
+        <div class="my-comment" dir="rtl">
             {% include "new_comment.html" %}
         </div>
     </div>
