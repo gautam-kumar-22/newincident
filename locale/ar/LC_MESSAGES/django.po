@@ -310,3 +310,12 @@ msgstr "تحديث"
 
 msgid "Update Incident"
 msgstr "تحديث الحادث"
+
+msgid "Print"
+msgstr "طباعة"
+
+msgid "Export incidents"
+msgstr "حوادث التصدير"
+
+msgid "All tasks"
+msgstr "كل المهام"
