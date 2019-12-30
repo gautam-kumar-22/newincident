@@ -218,6 +218,7 @@ footer.page-footer.font-small.blue {
 }
 .comment-section {
     background-color: #f7f5f5;
+    text-align: right;
 }
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,

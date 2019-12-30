@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-<div class="col-lg-9 blog-list">
+<div class="col-lg-9 blog-list" dir="rtl">
 	<nav aria-label="breadcrumb" style="padding-top: 8%;">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
@@ -9,7 +9,7 @@
 		</ol>
 	</nav>
 
-	<div class="blog-list-container col-sm-12">
+	<div class="blog-list-container col-sm-12" style="text-align: right;">
 		{% for blog in blog_list %}
 		<div class="blog" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4); padding-bottom: 2%; padding-top: 2%;">
 			<div class="blog-title" style="font-weight: bold; color: #264c7b; padding-bottom: 2%;">{{blog.title}}</div>
