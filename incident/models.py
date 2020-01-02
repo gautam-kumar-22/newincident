@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 # from ckeditor.fields import RichTextField, RichTextUploadingField
 from ckeditor_uploader.fields import RichTextUploadingField
+import nexmo
 
 
 # Create your models here.
@@ -82,6 +83,14 @@ class Incident(TimeStampedModel):
 
     def __str__(self):
         return self.subject
+
+    def save(self, *args, **kwargs):
+        if self.sector.name=="ministries":
+            client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
+            client.send_message({'from': 'Misbar System', 'to': '96897135701',
+            'text': 'Your incident with sector ministries has been created.',
+            })
+        super(Incident, self).save(*args, **kwargs)
 
 
 class Related_ip(TimeStampedModel):
