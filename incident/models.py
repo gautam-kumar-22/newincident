@@ -101,16 +101,16 @@ class Incident(TimeStampedModel):
             client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
             to = '+96897135701'
             from_txt = 'Misbar'
-            subject = "Your incident with sector ministries has been created."
-            time = timestamp
-            affectedunit = affectedunit
-            category = category
+            subject = self.subject
+            time = self.timestamp
+            affectedunit = self.affectedunit
+            category = self.category
             message = "{subject}\nTime: {time}\naffectedunit: {affectedunit}\nCategory: {category}\n".format(subject=subject, time=time, affectedunit=affectedunit, category=category)
             client.send_message({'from': from_txt, 'to': to,
             'text': message,
             })
 
-            
+
         super(Incident, self).save(*args, **kwargs)
 
 
