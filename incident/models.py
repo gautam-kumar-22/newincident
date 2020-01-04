@@ -85,7 +85,7 @@ class Incident(TimeStampedModel):
         return self.subject
 
     def save(self, *args, **kwargs):
-        if self.sector.name=="ministries":
+        if "ministries" in self.sector.name:
             # client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
             # to = '0096897135701'
             # from_txt = 'نظام مسبار'
