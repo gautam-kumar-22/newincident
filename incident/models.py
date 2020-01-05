@@ -85,7 +85,7 @@ class Incident(TimeStampedModel):
         return self.subject
 
     def save(self, *args, **kwargs):
-        if "ministries" in self.sector.name:
+        # if "ministries" in self.sector.name:
             # client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
             # to = '0096897135701'
             # from_txt = 'نظام مسبار'
@@ -97,18 +97,18 @@ class Incident(TimeStampedModel):
             # client.send_message({'from': from_txt, 'to': to,
             # 'text': message,
             # })
-            import pdb; pdb.set_trace()
-            client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
-            to = '+918269588118'
-            from_txt = 'Misbar'
-            subject = self.subject
-            time = self.timestamp
-            affectedunit = self.affectedunit
-            category = self.category
-            message = "{subject}\nTime: {time}\naffectedunit: {affectedunit}\nCategory: {category}\n".format(subject=subject, time=time, affectedunit=affectedunit, category=category)
-            client.send_message({'from': from_txt, 'to': to,
-            'text': message,
-            })
+        client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
+        to = '+918269588118'
+        from_txt = 'Misbar'
+        subject = self.subject
+        time = self.timestamp
+        affectedunit = self.affectedunit
+        category = self.category
+        status = self.status
+        message = "{subject}\nTime: {time}\naffectedunit: {affectedunit}\nCategory: {category}\nStatus:{status}".format(subject=subject, time=time, affectedunit=affectedunit, category=category, status=status)
+        client.send_message({'from': from_txt, 'to': to,
+        'text': message,
+        })
 
 
         super(Incident, self).save(*args, **kwargs)
