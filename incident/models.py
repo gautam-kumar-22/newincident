@@ -97,9 +97,9 @@ class Incident(TimeStampedModel):
             # client.send_message({'from': from_txt, 'to': to,
             # 'text': message,
             # })
-
+            import pdb; pdb.set_trace()
             client = nexmo.Client(key='d7f80c7c', secret='VufAqNo9kXedsT3F')
-            to = '+96897135701'
+            to = '+918269588118'
             from_txt = 'Misbar'
             subject = self.subject
             time = self.timestamp
