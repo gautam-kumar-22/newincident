@@ -106,7 +106,6 @@ class Incident(TimeStampedModel):
         category = self.category.name
         status = self.status
         message = "{subject}\nTime: {time}\nAffected Unit: {affectedunit}\nCategory: {category}\nStatus:{status}\n".format(subject=subject, time=time, affectedunit=affectedunit, category=category, status=status)
-        print(message)
         client.send_message({'from': from_txt, 'to': to,
         'text': message,
         })
